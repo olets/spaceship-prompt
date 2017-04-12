@@ -37,6 +37,7 @@ SPACESHIP_GIT_UNTRACKED="${SPACESHIP_GIT_UNTRACKED:-?}"
 SPACESHIP_GIT_STASHED="${SPACESHIP_GIT_STASHED:-$}"
 SPACESHIP_GIT_UNPULLED="${SPACESHIP_GIT_UNPULLED:-⇣}"
 SPACESHIP_GIT_UNPUSHED="${SPACESHIP_GIT_UNPUSHED:-⇡}"
+SPACESHIP_GIT_STATUS_PREFIX="${SPACESHIP_GIT_STATUS_PREFIX:-}"
 
 # TIME
 SPACESHIP_TIME_SHOW="${SPACESHIP_TIME_SHOW:-false}"
@@ -215,7 +216,7 @@ spaceship_git_status() {
     indicators+="$(spaceship_git_stashed)"
     indicators+="$(spaceship_git_unpushed_unpulled)"
 
-    [ -n "${indicators}" ] && indicators=" [${indicators}]";
+    [ -n "${indicators}" ] && indicators=" [${SPACESHIP_GIT_STATUS_PREFIX}${indicators}]";
 
     # Do not show git prefix if prefixes are disabled
     [[ $SPACESHIP_PREFIX_SHOW == true ]] && echo -n "%B${SPACESHIP_PREFIX_GIT}%b" || echo -n ' '

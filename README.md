@@ -155,6 +155,7 @@ Now you have ability to disable elements of Spaceship. All options must be overr
 | `SPACESHIP_GIT_STASHED` | `$` | Character to be shown on stashed changes |
 | `SPACESHIP_GIT_UNPULLED` | `⇣` | Character to be shown on unpulled changes |
 | `SPACESHIP_GIT_UNPUSHED` | `⇡` | Character to be shown on unpushed changes |
+| `SPACESHIP_GIT_STATUS_PREFIX` | '' | Character to be shown before the first of the Git status indicators |
 
 ### Time
 
@@ -276,6 +277,7 @@ SPACESHIP_GIT_UNTRACKED='?'
 SPACESHIP_GIT_STASHED='$'
 SPACESHIP_GIT_UNPULLED='⇣'
 SPACESHIP_GIT_UNPUSHED='⇡'
+SPACESHIP_GIT_STATUS_PREFIX=''
 
 # TIME
 SPACESHIP_TIME_SHOW=false
