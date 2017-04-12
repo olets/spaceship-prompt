@@ -33,6 +33,7 @@ Currently it shows:
 * Current Python virtualenv.
 * Current Python pyenv (`🐍`).
 * Current Vi-mode mode ([with handy aliases for temporarily enabling](#vi-mode)).
+* Hint to start Rails (with optional notes) (`🚂`).
 * Optional time stamps 12/24hr in format ([how to enable](#time)).
 
 Want more features? Please, [open an issue](https://github.com/denysdovhan/spaceship-zsh-theme/issues/new) or send pull request.
@@ -143,6 +144,7 @@ Now you have ability to disable elements of Spaceship. All options must be overr
 | `SPACESHIP_PREFIX_VENV` | `SPACESHIP_PREFIX_ENV_DEFAULT` | Prefix before the Python virtualenv Environment |
 | `SPACESHIP_PREFIX_PYENV` | `SPACESHIP_PREFIX_ENV_DEFAULT` | Prefix before the Python pyenv Environment |
 | `SPACESHIP_PREFIX_DOCKER` | `on` | Prefix before the Docker version |
+| `SPACESHIP_PREFIX_RAILS` | `start` | Prefix before Rails comments |
 
 ### Git
 
@@ -242,6 +244,15 @@ You can temporarily enable or disable vi-mode with handy functions (just execute
 
 **Note:** For oh-my-zsh users with vi-mode plugin enabled: Add `export RPS1="%{$reset_color%}"` before `source $ZSH/oh-my-zsh.sh` in `.zshrc` to disable default `<<<` NORMAL mode indicator in right prompt.
 
+### Rails
+
+| Variable | Default | Meaning |
+| :------- | :-----: | ------- |
+| `SPACESHIP_RAILS_SHOW` | `true` | Hint to start the Rails server |
+| `SPACESHIP_RAILS_SYMBOL` | `🚂` | Character to be shown before Ruby version |
+
+**Note:** Watches for the presence of a `.rlsrc`. If the file has contents, they will print here.
+
 ### Example
 
 Here is all options which may be changed. Copy this to your `~/.zshrc` to make it easy to change.
@@ -267,6 +278,7 @@ SPACESHIP_PREFIX_XCODE=$SPACESHIP_PREFIX_ENV_DEFAULT
 SPACESHIP_PREFIX_SWIFT=$SPACESHIP_PREFIX_ENV_DEFAULT
 SPACESHIP_PREFIX_VENV=$SPACESHIP_PREFIX_ENV_DEFAULT
 SPACESHIP_PREFIX_PYENV=$SPACESHIP_PREFIX_ENV_DEFAULT
+SPACESHIP_PREFIX_RAILS=' start '
 
 # GIT
 SPACESHIP_GIT_SHOW=true
@@ -320,6 +332,10 @@ SPACESHIP_PYENV_SYMBOL='🐍'
 SPACESHIP_VI_MODE_SHOW=true
 SPACESHIP_VI_MODE_INSERT="[I]"
 SPACESHIP_VI_MODE_NORMAL="[N]"
+
+# RAILS
+SPACESHIP_RAILS_MODE_SHOW=true
+SPACESHIP_RAILS_SYMBOL='🚂'
 ```
 
 ## License

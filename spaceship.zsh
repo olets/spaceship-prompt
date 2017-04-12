@@ -28,6 +28,7 @@ SPACESHIP_PREFIX_DOCKER="${SPACESHIP_PREFIX_DOCKER:-" on "}"
 SPACESHIP_PREFIX_XCODE="${SPACESHIP_PREFIX_XCODE:-$SPACESHIP_PREFIX_ENV_DEFAULT}"
 SPACESHIP_PREFIX_VENV="${SPACESHIP_PREFIX_VENV:-$SPACESHIP_PREFIX_ENV_DEFAULT}"
 SPACESHIP_PREFIX_PYENV="${SPACESHIP_PREFIX_PYENV:-$SPACESHIP_PREFIX_ENV_DEFAULT}"
+SPACESHIP_PREFIX_RAILS="${SPACESHIP_PREFIX_RAILS:-" start "}"
 
 # GIT
 SPACESHIP_GIT_SHOW="${SPACESHIP_GIT_SHOW:-true}"
@@ -80,6 +81,10 @@ SPACESHIP_PYENV_SYMBOL="${SPACESHIP_PYENV_SYMBOL:-🐍}"
 SPACESHIP_VI_MODE_SHOW="${SPACESHIP_VI_MODE_SHOW:-true}"
 SPACESHIP_VI_MODE_INSERT="${SPACESHIP_VI_MODE_INSERT:-[I]}"
 SPACESHIP_VI_MODE_NORMAL="${SPACESHIP_VI_MODE_NORMAL:-[N]}"
+
+# RAILS
+SPACESHIP_RAILS_MODE_SHOW="${SPACESHIP_RAILS_MODE_SHOW:-true}"
+SPACESHIP_RAILS_SYMBOL="${SPACESHIP_RAILS_SYMBOL:-🚂}"
 
 # Time
 spaceship_time() {
@@ -442,6 +447,24 @@ spaceship_vi_mode() {
   fi
 }
 
+# Rails
+# Show recommended Rails command
+spaceship_rails_command() {
+
+  [[ $SPACESHIP_RAILS_SHOW == false ]] && return
+
+  [[ -f .rlsrc ]] && rails_command=$(cat .rlsrc)|| return
+
+  rails_command="  $rails_command"
+
+  # Do not show prefix if prefixes are disabled
+  [[ ${SPACESHIP_PREFIX_SHOW} == true ]] && echo -n "%B${SPACESHIP_PREFIX_RAILS}%b" || echo -n ' '
+
+  echo -n "%{$fg_bold[blue]%}"
+  echo -n "${SPACESHIP_RAILS_SYMBOL}${rails_command}"
+  echo -n "%{$reset_color%}"
+}
+
 # Temporarily switch to vi-mode
 spaceship_vi_mode_enable() {
   function zle-keymap-select() { zle reset-prompt ; zle -R }
@@ -488,6 +511,7 @@ spaceship_prompt() {
   spaceship_docker_version
   spaceship_venv_status
   spaceship_pyenv_status
+  spaceship_rails_command
 
   # Should it write prompt in two lines or not?
   # Write a space before, if it's written in single line
