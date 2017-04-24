@@ -19,7 +19,8 @@ Currently it shows:
   * `?` — untracked changes;
   * `$` — stashed changes;
   * `⇣` — unpulled commits;
-  * `⇡` — unpushed commits.
+  * `⇡` — unpushed commits;
+  * `x` - `--assume-unchanged` files.
 * Prompt character turns red if the last command exits with non-zero code.
 * Hostname only displayed when in an SSH session.
 * Username displayed only when it isn't `$LOGNAME`.
@@ -155,6 +156,7 @@ Now you have ability to disable elements of Spaceship. All options must be overr
 | `SPACESHIP_GIT_STASHED` | `$` | Character to be shown on stashed changes |
 | `SPACESHIP_GIT_UNPULLED` | `⇣` | Character to be shown on unpulled changes |
 | `SPACESHIP_GIT_UNPUSHED` | `⇡` | Character to be shown on unpushed changes |
+| `SPACESHIP_GIT_ASSUME_UNCHANGED` | `x` | Character to be shown on `--assume-unchanged` files |
 
 ### Time
 
@@ -276,6 +278,7 @@ SPACESHIP_GIT_UNTRACKED='?'
 SPACESHIP_GIT_STASHED='$'
 SPACESHIP_GIT_UNPULLED='⇣'
 SPACESHIP_GIT_UNPUSHED='⇡'
+SPACESHIP_GIT_ASSUME_UNCHANGED='x'
 
 # TIME
 SPACESHIP_TIME_SHOW=false
