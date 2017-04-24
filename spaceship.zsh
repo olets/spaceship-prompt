@@ -37,6 +37,7 @@ SPACESHIP_GIT_UNTRACKED="${SPACESHIP_GIT_UNTRACKED:-?}"
 SPACESHIP_GIT_STASHED="${SPACESHIP_GIT_STASHED:-$}"
 SPACESHIP_GIT_UNPULLED="${SPACESHIP_GIT_UNPULLED:-⇣}"
 SPACESHIP_GIT_UNPUSHED="${SPACESHIP_GIT_UNPUSHED:-⇡}"
+SPACESHIP_GIT_ASSUME_UNCHANGED="${SPACESHIP_GIT_ASSUME_UNCHANGED:-x}"
 
 # TIME
 SPACESHIP_TIME_SHOW="${SPACESHIP_TIME_SHOW:-false}"
@@ -193,6 +194,13 @@ spaceship_git_unpushed_unpulled() {
   [ -n $arrows ] && echo -n "${arrows}"
 }
 
+# Files flagged --assume-unchanged.
+spaceship_git_assume_unchanged() {
+  if [ -n "$(git ls-files -v `git rev-parse --show-toplevel` | grep '^[[:lower:]]')" ]; then
+    echo -n "${SPACESHIP_GIT_ASSUME_UNCHANGED}"
+  fi
+}
+
 # Git status.
 # Collect indicators, git branch and pring string.
 spaceship_git_status() {
@@ -214,6 +222,7 @@ spaceship_git_status() {
     indicators+="$(spaceship_git_untracked)"
     indicators+="$(spaceship_git_stashed)"
     indicators+="$(spaceship_git_unpushed_unpulled)"
+    indicators+="$(spaceship_git_assume_unchanged)"
 
     [ -n "${indicators}" ] && indicators=" [${indicators}]";
 
