@@ -488,7 +488,7 @@ spaceship_dir() {
 }
 
 # GIT BRANCH
-# Show current git brunch using git_current_status from Oh-My-Zsh
+# Show current git branch using git_current_status from Oh-My-Zsh
 spaceship_git_branch() {
   [[ $SPACESHIP_GIT_BRANCH_SHOW == false ]] && return
 
