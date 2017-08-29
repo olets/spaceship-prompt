@@ -60,6 +60,9 @@ Currently it shows:
   * `⇡` - charging;
   * `⇣` - discharging;
   * `•` - fully charged;
+* Current Harvest status:
+  * `⏳` - running;
+  * `🛑` - not running.
 * Current Vi-mode mode ([with handy aliases for temporarily enabling](#vi-mode-vi_mode)).
 * Indicator for jobs in the background (`✦`).
 * Optional exit-code of last command ([how to enable](#exit-code-exit_code)).
@@ -189,6 +192,7 @@ SPACESHIP_PROMPT_ORDER=(
   exec_time     # Execution time
   line_sep      # Line break
   battery       # Battery level and status
+  harvest       # Harvest status
   vi_mode       # Vi-mode indicator
   jobs          # Backgound jobs indicator
   exit_code     # Exit code section
@@ -579,6 +583,20 @@ By default, Battery section is shown only if battery level is below `SPACESHIP_B
 | `SPACESHIP_BATTERY_DISCHARGING_SYMBOL` | `⇣` | Character to be shown if battery is discharging |
 | `SPACESHIP_w_FULL_SYMBOL` | `•` | Character to be shown if battery is full |
 | `SPACESHIP_BATTERY_THRESHOLD` | 10 | Battery level below which battery section will be shown |
+
+### Harvest (`harvest`)
+
+By default, Harvest section is shown only when a Harvest task is running. Toggle `SPACESHIP_HARVEST_SHOW_STOPPED` to show it when Harvest is stopped.
+
+| Variable | Default | Meaning |
+| :------- | :-----: | ------- |
+`SPACESHIP_HARVEST_SHOW_RUNNING` | `true` | Show the Harvest section when Harvest is running |
+`SPACESHIP_HARVEST_SHOW_STOPPED` | `false` | Show the Harvest section when Harvest is not running |
+`SPACESHIP_HARVEST_PREFIX` | `` | Prefix before Harvest section |
+`SPACESHIP_HARVEST_SUFFIX` | `SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after Harvest section |
+`SPACESHIP_HARVEST_RUNNING_SYMBOL` | `⏳` | Character to be shown if Harvest is running |
+`SPACESHIP_HARVEST_STOPPED_SYMBOL` | `🛑` | Character to be shown if Harvest is not running |
+`SPACESHIP_HARVEST_COLOR` | `208` | Color of the Harvest section |
 
 ### Vi-mode (`vi_mode`)
 
