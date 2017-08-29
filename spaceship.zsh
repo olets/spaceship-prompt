@@ -43,6 +43,7 @@ if [ ! -n "$SPACESHIP_PROMPT_ORDER" ]; then
     exec_time
     line_sep
     battery
+    harvest
     vi_mode
     jobs
     exit_code
@@ -272,6 +273,15 @@ SPACESHIP_BATTERY_DISCHARGING_SYMBOL="${SPACESHIP_BATTERY_DISCHARGING_SYMBOL:="�
 SPACESHIP_BATTERY_FULL_SYMBOL="${SPACESHIP_BATTERY_FULL_SYMBOL:="•"}"
 SPACESHIP_BATTERY_THRESHOLD="${SPACESHIP_BATTERY_THRESHOLD:=10}"
 
+# HARVEST
+SPACESHIP_HARVEST_SHOW_RUNNING="${SPACESHIP_HARVEST_SHOW_RUNNING:=true}"
+SPACESHIP_HARVEST_SHOW_STOPPED="${SPACESHIP_HARVEST_SHOW_STOPPED:=false}"
+SPACESHIP_HARVEST_PREFIX="${SPACESHIP_HARVEST_PREFFIX:=""}"
+SPACESHIP_HARVEST_SUFFIX="${SPACESHIP_HARVEST_SUFFIX:="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"}"
+SPACESHIP_HARVEST_RUNNING_SYMBOL="${SPACESHIP_HARVEST_RUNNING_SYMBOL:="⏳ "}"
+SPACESHIP_HARVEST_STOPPED_SYMBOL="${SPACESHIP_HARVEST_STOPPED_SYMBOL:="🛑 "}"
+SPACESHIP_HARVEST_COLOR="${SPACESHIP_HARVEST_COLOR:="208"}"
+
 # VI_MODE
 SPACESHIP_VI_MODE_SHOW="${SPACESHIP_VI_MODE_SHOW:=true}"
 SPACESHIP_VI_MODE_PREFIX="${SPACESHIP_VI_MODE_PREFIX:=""}"
@@ -488,7 +498,7 @@ spaceship_dir() {
 }
 
 # GIT BRANCH
-# Show current git brunch using git_current_status from Oh-My-Zsh
+# Show current git branch using git_current_status from Oh-My-Zsh
 spaceship_git_branch() {
   [[ $SPACESHIP_GIT_BRANCH_SHOW == false ]] && return
 
@@ -1092,6 +1102,39 @@ spaceship_battery() {
       "$SPACESHIP_BATTERY_PREFIX" \
       "$battery_symbol$battery_percent%%" \
       "$SPACESHIP_BATTERY_SUFFIX"
+  fi
+}
+
+# HARVEST
+# Show section only if either of follow is true
+# - Always show is true
+# - Harvest is running
+spaceship_harvest() {
+  [[ $SPACESHIP_HARVEST_SHOW == false ]] && return
+
+  local harvest_state harvest_symbol show_running show_stopped
+
+  # Check harvest status (requires hcl)
+  if _exists hcl; then
+    if hcl show | grep -q '(running)'; then
+      harvest_state=true
+    else
+      harvest_state=false
+    fi
+  fi
+
+  if [[ $harvest_state == true ]]; then
+    harvest_symbol="$SPACESHIP_HARVEST_RUNNING_SYMBOL"
+  elif [[ $harvest_state == false ]]; then
+    harvest_symbol="$SPACESHIP_HARVEST_STOPPED_SYMBOL"
+  fi
+
+  if [[ ($SPACESHIP_HARVEST_SHOW_RUNNING == true && $harvest_state == true) || ($SPACESHIP_HARVEST_SHOW_STOPPED == true && $harvest_state == false) ]]; then
+    _prompt_section \
+      "$SPACESHIP_HARVEST_COLOR" \
+      "$SPACESHIP_HARVEST_PREFIX" \
+      "$harvest_symbol" \
+      "$SPACESHIP_HARVEST_SUFFIX"
   fi
 }
 
