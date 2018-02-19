@@ -46,7 +46,7 @@ SPACESHIP_GIT_STATUS_ALERT_COLOR="${SPACESHIP_GIT_STATUS_ALERT_COLOR="$SPACESHIP
 SPACESHIP_GIT_BRANCH_ALERT_COLOR="${SPACESHIP_GIT_BRANCH_ALERT_COLOR="$SPACESHIP_GIT_ALERT_COLOR"}"
 SPACESHIP_GIT_STASH_COLOR="${SPACESHIP_GIT_STASH_COLOR="$SPACESHIP_GIT_STATUS_COLOR"}"
 SPACESHIP_GIT_OMG_EXPANDED="${SPACESHIP_GIT_OMG_EXPANDED=true}"
-# not supported by OMG
+SPACESHIP_GIT_STATUS_ACTION="${SPACESHIP_GIT_STATUS_ACTION=" "}"
 # SPACESHIP_GIT_STATUS_NEEDS_TO_MERGE="${SPACESHIP_GIT_STATUS_NEEDS_TO_MERGE='ᄉ'}"
 
 # ------------------------------------------------------------------------------
@@ -94,6 +94,7 @@ custom_build_prompt() {
     local should_push=${21}
     local will_rebase=${22}
     local has_stashes=${23}
+    local action=${24}
 
     local omg_status omg_branch OMG_DEFAULT_COLOR="$SPACESHIP_GIT_STATUS_COLOR"
 
@@ -111,6 +112,9 @@ custom_build_prompt() {
 
     # next operation
     omg_status+=$(enrich_append $ready_to_commit $SPACESHIP_GIT_STATUS_READY_TO_COMMIT "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
+
+    # current action
+    omg_status+=$(enrich_append $action "${SPACESHIP_GIT_STATUS_ACTION} $(get_current_action)" "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
 
     OMG_DEFAULT_COLOR="$SPACESHIP_GIT_BRANCH_COLOR"
 
