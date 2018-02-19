@@ -45,6 +45,7 @@ SPACESHIP_GIT_ALERT_COLOR="${SPACESHIP_GIT_ALERT_COLOR="yellow"}"
 SPACESHIP_GIT_STATUS_ALERT_COLOR="${SPACESHIP_GIT_STATUS_ALERT_COLOR="$SPACESHIP_GIT_ALERT_COLOR"}"
 SPACESHIP_GIT_BRANCH_ALERT_COLOR="${SPACESHIP_GIT_BRANCH_ALERT_COLOR="$SPACESHIP_GIT_ALERT_COLOR"}"
 SPACESHIP_GIT_STASH_COLOR="${SPACESHIP_GIT_STASH_COLOR="$SPACESHIP_GIT_STATUS_COLOR"}"
+SPACESHIP_GIT_STATUS_ACTION="${SPACESHIP_GIT_STATUS_ACTION=" "}"
 
 # ------------------------------------------------------------------------------
 # Section
@@ -87,6 +88,7 @@ custom_build_prompt() {
   local should_push=${20}
   local will_rebase=${21}
   local has_stashes=${22}
+  local action=${23}
 
   local omg_status omg_branch OMG_DEFAULT_COLOR="$SPACESHIP_GIT_STATUS_COLOR"
 
@@ -104,6 +106,9 @@ custom_build_prompt() {
 
   # next operation
   omg_status+=$(enrich_append $ready_to_commit $SPACESHIP_GIT_STATUS_READY_TO_COMMIT "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
+
+  # current action
+  omg_status+=$(enrich_append $action "${SPACESHIP_GIT_STATUS_ACTION} $(get_current_action)" "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
 
   OMG_DEFAULT_COLOR="$SPACESHIP_GIT_BRANCH_COLOR"
 
