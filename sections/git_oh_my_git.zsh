@@ -21,6 +21,7 @@ SPACESHIP_GIT_OMG_PREFIX="${SPACESHIP_GIT_OMG_PREFIX=""}" # enhancement to OMG
 SPACESHIP_GIT_OMG_SUFFIX="${SPACESHIP_GIT_OMG_SUFFIX=""}" # enhancement to OMG
 SPACESHIP_GIT_OMG_ICONS="${SPACESHIP_GIT_OMG_ICONS=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_EXPANDED="${SPACESHIP_GIT_OMG_EXPANDED=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_STATUS_FIRST="${SPACESHIP_GIT_OMG_STATUS_FIRST=true}" # enhancement to OMG
 
 # Status
 SPACESHIP_GIT_OMG_STATUS_SHOW="${SPACESHIP_GIT_OMG_STATUS_SHOW=true}" # enhancement to OMG
@@ -104,6 +105,35 @@ enrich_append() {
     echo -n "%{%B%F{$omg_color}%}"
   else
     echo -n "${indicator}"
+  fi
+}
+
+spaceship_git_oh_my_git_status() {
+  if [[ -n "$omg_status" ]]; then
+    spaceship_omg_status="$SPACESHIP_GIT_OMG_STATUS_PREFIX$omg_status$SPACESHIP_GIT_OMG_STATUS_SUFFIX"
+    if [[ $SPACESHIP_GIT_OMG_STATUS_FIRST == true ]]; then
+      spaceship_omg_status="$SPACESHIP_GIT_OMG_PREFIX$spaceship_omg_status"
+    else
+      spaceship_omg_status+="$SPACESHIP_GIT_OMG_SUFFIX"
+    fi
+    # Status prefixes are colorized
+    spaceship::section \
+      "$SPACESHIP_GIT_OMG_STATUS_COLOR" "$spaceship_omg_status"
+  fi
+}
+
+spaceship_git_oh_my_git_where() {
+  if [[ -n "$omg_where" && "$omg_where" != ' ' ]]; then
+    spaceship_omg_where="$SPACESHIP_GIT_OMG_WHERE_PREFIX$omg_where$SPACESHIP_GIT_OMG_WHERE_SUFFIX"
+    if [[ $SPACESHIP_GIT_OMG_STATUS_FIRST == true ]]; then
+      spaceship_omg_where+="$SPACESHIP_GIT_OMG_SUFFIX"
+    else
+      spaceship_omg_where="$SPACESHIP_GIT_OMG_PREFIX$spaceship_omg_where"
+    fi
+
+    # Status prefixes are colorized
+    spaceship::section \
+      "$SPACESHIP_GIT_OMG_WHERE_COLOR" "$spaceship_omg_where"
   fi
 }
 
@@ -210,18 +240,12 @@ custom_build_prompt() {
     [[ $is_on_a_tag == true ]] && omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_TAG}${tag_at_current_commit}")
   fi
 
-  if [[ -n "$omg_status" ]]; then
-    # Status prefixes are colorized
-    spaceship::section \
-      "$SPACESHIP_GIT_OMG_STATUS_COLOR" \
-      "$SPACESHIP_GIT_OMG_PREFIX$SPACESHIP_GIT_OMG_STATUS_PREFIX${omg_status}$SPACESHIP_GIT_OMG_STATUS_SUFFIX"
-  fi
-
-  if [[ -n "$omg_where" && "$omg_where" != ' ' ]]; then
-    # Status prefixes are colorized
-    spaceship::section \
-      "$SPACESHIP_GIT_OMG_WHERE_COLOR" \
-      "$SPACESHIP_GIT_OMG_WHERE_PREFIX${omg_where}$SPACESHIP_GIT_OMG_WHERE_SUFFIX$SPACESHIP_GIT_OMG_SUFFIX"
+  if [[ $SPACESHIP_GIT_OMG_STATUS_FIRST == true ]]; then
+    spaceship_git_oh_my_git_status spaceship_omg_status
+    spaceship_git_oh_my_git_where spaceship_omg_where
+  else
+    spaceship_git_oh_my_git_where spaceship_omg_where
+    spaceship_git_oh_my_git_status spaceship_omg_status
   fi
 }
 
