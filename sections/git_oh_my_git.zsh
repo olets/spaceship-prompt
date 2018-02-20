@@ -15,82 +15,96 @@ source "$SPACESHIP_ROOT/sections/git_oh_my_git_base.zsh"
 # Configuration
 # ------------------------------------------------------------------------------
 
-SPACESHIP_GIT_OMG_ICONS="${SPACESHIP_GIT_OMG_ICONS=true}"
-# Spaceship git branch
-SPACESHIP_GIT_BRANCH_COLOR="${SPACESHIP_GIT_BRANCH_COLOR="magenta"}"
+# General
+SPACESHIP_GIT_OMG_ALERT_COLOR="${SPACESHIP_GIT_OMG_ALERT_COLOR="yellow"}"
+SPACESHIP_GIT_OMG_PREFIX="${SPACESHIP_GIT_OMG_PREFIX=""}" # enhancement to OMG
+SPACESHIP_GIT_OMG_SUFFIX="${SPACESHIP_GIT_OMG_SUFFIX=""}" # enhancement to OMG
+SPACESHIP_GIT_OMG_ICONS="${SPACESHIP_GIT_OMG_ICONS=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_EXPANDED="${SPACESHIP_GIT_OMG_EXPANDED=true}" # enhancement to OMG
+
+# Status
+SPACESHIP_GIT_OMG_STATUS_SHOW="${SPACESHIP_GIT_OMG_STATUS_SHOW=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_STATUS_COLOR="${SPACESHIP_GIT_OMG_STATUS_COLOR="red"}"
+SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR="${SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR="$SPACESHIP_GIT_OMG_ALERT_COLOR"}"
+SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR_ALT="${SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR_ALT="blue"}"
 if [[ $SPACESHIP_GIT_OMG_ICONS == true ]]; then
-  SPACESHIP_GIT_BRANCH_PREFIX="${SPACESHIP_GIT_BRANCH_PREFIX="("}"
-  SPACESHIP_GIT_BRANCH_SUFFIX="${SPACESHIP_GIT_BRANCH_SUFFIX=")"}"
-else
-  SPACESHIP_GIT_BRANCH_PREFIX="${SPACESHIP_GIT_BRANCH_PREFIX=""}"
-  SPACESHIP_GIT_BRANCH_SUFFIX="${SPACESHIP_GIT_BRANCH_SUFFIX=""}"
+  SPACESHIP_GIT_OMG_STATUS_PREFIX="${SPACESHIP_GIT_OMG_STATUS_PREFIX="  "}"
+  SPACESHIP_GIT_OMG_STATUS_SUFFIX="${SPACESHIP_GIT_OMG_STATUS_SUFFIX=""}"
+  SPACESHIP_GIT_OMG_STASHED="${SPACESHIP_GIT_OMG_STASHED=" "}"
+  SPACESHIP_GIT_OMG_UNTRACKED="${SPACESHIP_GIT_OMG_UNTRACKED=" "}"
+  SPACESHIP_GIT_OMG_MODIFIED="${SPACESHIP_GIT_OMG_MODIFIED=" "}"
+  SPACESHIP_GIT_OMG_DELETED="${SPACESHIP_GIT_OMG_DELETED=" "}"
+  SPACESHIP_GIT_OMG_ADDED="${SPACESHIP_GIT_OMG_ADDED=" "}"
+else                                                                    # enhancement to OMG
+  SPACESHIP_GIT_OMG_STATUS_PREFIX="${SPACESHIP_GIT_OMG_STATUS_PREFIX="[ "}"
+  SPACESHIP_GIT_OMG_STATUS_SUFFIX="${SPACESHIP_GIT_OMG_STATUS_SUFFIX=" ] "}"
+  SPACESHIP_GIT_OMG_STASHED="${SPACESHIP_GIT_OMG_STASHED="$"}"
+  SPACESHIP_GIT_OMG_UNTRACKED="${SPACESHIP_GIT_OMG_UNTRACKED="?"}"
+  SPACESHIP_GIT_OMG_MODIFIED="${SPACESHIP_GIT_OMG_MODIFIED="!"}"
+  SPACESHIP_GIT_OMG_DELETED="${SPACESHIP_GIT_OMG_DELETED="✘ "}"
+  SPACESHIP_GIT_OMG_ADDED="${SPACESHIP_GIT_OMG_ADDED="+"}"
 fi
-# SPACESHIP_GIT_BRANCH_PREFIX="${SPACESHIP_GIT_BRANCH_PREFIX}"
-# Spaceship git status
-SPACESHIP_GIT_STATUS_SHOW="${SPACESHIP_GIT_STATUS_SHOW=true}"
-SPACESHIP_GIT_STATUS_COLOR="${SPACESHIP_GIT_STATUS_COLOR="red"}"
+SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS="${SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS=" "}"
+SPACESHIP_GIT_OMG_CACHED_DELETIONS="${SPACESHIP_GIT_OMG_CACHED_DELETIONS=" "}"
+SPACESHIP_GIT_OMG_ALL_STAGED="${SPACESHIP_GIT_OMG_ALL_STAGED=" "}"
+SPACESHIP_GIT_OMG_ACTION_PREFIX="${SPACESHIP_GIT_OMG_ACTION_PREFIX="  "}" # enhancement to OMG
+
+# Where
+SPACESHIP_GIT_OMG_WHERE_SHOW="${SPACESHIP_GIT_OMG_WHERE_SHOW=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_WHERE_COLOR="${SPACESHIP_GIT_OMG_WHERE_COLOR="magenta"}"
+SPACESHIP_GIT_OMG_WHERE_ALERT_COLOR="${SPACESHIP_GIT_OMG_WHERE_ALERT_COLOR="$SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR"}"
+SPACESHIP_GIT_OMG_WHERE_PREFIX="${SPACESHIP_GIT_OMG_WHERE_PREFIX=" "}"
+SPACESHIP_GIT_OMG_WHERE_SUFFIX="${SPACESHIP_GIT_OMG_WHERE_SUFFIX=""}"
 if [[ $SPACESHIP_GIT_OMG_ICONS == true ]]; then
-  SPACESHIP_GIT_STATUS_PREFIX="${SPACESHIP_GIT_STATUS_PREFIX="  "}"
-  SPACESHIP_GIT_STATUS_SUFFIX="${SPACESHIP_GIT_STATUS_SUFFIX=" "}"
-  SPACESHIP_GIT_STATUS_UNTRACKED="${SPACESHIP_GIT_STATUS_UNTRACKED=" "}"
-  SPACESHIP_GIT_STATUS_ADDED="${SPACESHIP_GIT_STATUS_ADDED=" "}"
-  SPACESHIP_GIT_STATUS_MODIFIED="${SPACESHIP_GIT_STATUS_MODIFIED=" "}"
-  SPACESHIP_GIT_STATUS_DELETED="${SPACESHIP_GIT_STATUS_DELETED=" "}"
-  SPACESHIP_GIT_STATUS_STASHED="${SPACESHIP_GIT_STATUS_STASHED=" "}"
-  SPACESHIP_GIT_STATUS_DIVERGED="${SPACESHIP_GIT_STATUS_DIVERGED=" "}"
-  SPACESHIP_GIT_STATUS_BEHIND="${SPACESHIP_GIT_STATUS_BEHIND=" "}"
-  SPACESHIP_GIT_STATUS_AHEAD="${SPACESHIP_GIT_STATUS_AHEAD="  "}"
-else
-  SPACESHIP_GIT_STATUS_PREFIX="${SPACESHIP_GIT_STATUS_PREFIX="["}"
-  SPACESHIP_GIT_STATUS_SUFFIX="${SPACESHIP_GIT_STATUS_SUFFIX="]"}"
-  SPACESHIP_GIT_STATUS_UNTRACKED="${SPACESHIP_GIT_STATUS_UNTRACKED="?"}"
-  SPACESHIP_GIT_STATUS_ADDED="${SPACESHIP_GIT_STATUS_ADDED="+"}"
-  SPACESHIP_GIT_STATUS_MODIFIED="${SPACESHIP_GIT_STATUS_MODIFIED="!"}"
-  SPACESHIP_GIT_STATUS_DELETED="${SPACESHIP_GIT_STATUS_DELETED="✘"}"
-  SPACESHIP_GIT_STATUS_STASHED="${SPACESHIP_GIT_STATUS_STASHED="$"}"
-  SPACESHIP_GIT_STATUS_DIVERGED="${SPACESHIP_GIT_STATUS_DIVERGED="⇕"}"
-  SPACESHIP_GIT_STATUS_BEHIND="${SPACESHIP_GIT_STATUS_BEHIND="⇣"}"
-  SPACESHIP_GIT_STATUS_AHEAD="${SPACESHIP_GIT_STATUS_AHEAD="⇡"}"
+  SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX="("}"
+  SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX="${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX=")"}"
+else                                                                    # enhancement to OMG
+  SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX=""}"
+  SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX="${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX=""}"
 fi
-# added for OMG
-SPACESHIP_GIT_STATUS_HAS_CACHED_DELETIONS="${SPACESHIP_GIT_STATUS_HAS_CACHED_DELETIONS=" "}"
-SPACESHIP_GIT_STATUS_HAS_CACHED_MODIFICATIONS="${SPACESHIP_GIT_STATUS_HAS_CACHED_MODIFICATIONS=" "}"
-SPACESHIP_GIT_STATUS_READY_TO_COMMIT="${SPACESHIP_GIT_STATUS_READY_TO_COMMIT=" "}"
-SPACESHIP_GIT_STATUS_IS_ON_A_TAG="${SPACESHIP_GIT_STATUS_IS_ON_A_TAG=" "}"
-SPACESHIP_DETACHED="${SPACESHIP_DETACHED=" "}"
-SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH="${SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH="  "}"
-SPACESHIP_GIT_STATUS_REBASE_TRACKING_BRANCH="${SPACESHIP_GIT_STATUS_REBASE_TRACKING_BRANCH="   "}"
+SPACESHIP_GIT_OMG_DETACHED="${SPACESHIP_GIT_OMG_DETACHED="  "}"
+SPACESHIP_GIT_OMG_NOT_TRACKED="${SPACESHIP_GIT_OMG_NOT_TRACKED="  "}"
+SPACESHIP_GIT_OMG_COMMITS_PREFIX="${SPACESHIP_GIT_OMG_COMMITS_PREFIX=" "}" # enhancement to OMG
+SPACESHIP_GIT_OMG_COMMITS_SUFFIX="${SPACESHIP_GIT_OMG_COMMITS_SUFFIX=" "}" # enhancement to OMG
 if [[ $SPACESHIP_GIT_OMG_ICONS == true ]]; then
-  SPACESHIP_GIT_STATUS_MERGE_TRACKING_BRANCH="${SPACESHIP_GIT_STATUS_MERGE_TRACKING_BRANCH="   "}"
-else
-  SPACESHIP_GIT_STATUS_MERGE_TRACKING_BRANCH="${SPACESHIP_GIT_STATUS_MERGE_TRACKING_BRANCH="   "}"
+  SPACESHIP_GIT_OMG_DIVERGED="${SPACESHIP_GIT_OMG_DIVERGED=" "}"
+  SPACESHIP_GIT_OMG_BEHIND="${SPACESHIP_GIT_OMG_BEHIND=" "}"
+  SPACESHIP_GIT_OMG_AHEAD="${SPACESHIP_GIT_OMG_AHEAD="  "}"
+else                                                                    # enhancement to OMG
+  SPACESHIP_GIT_OMG_DIVERGED="${SPACESHIP_GIT_OMG_DIVERGED="⇕ "}"
+  SPACESHIP_GIT_OMG_BEHIND="${SPACESHIP_GIT_OMG_BEHIND="⇣ "}"
+  SPACESHIP_GIT_OMG_AHEAD="${SPACESHIP_GIT_OMG_AHEAD="⇡ "}"
 fi
-SPACESHIP_GIT_ALERT_COLOR="${SPACESHIP_GIT_ALERT_COLOR="yellow"}"
-SPACESHIP_GIT_STATUS_ALERT_COLOR="${SPACESHIP_GIT_STATUS_ALERT_COLOR="$SPACESHIP_GIT_ALERT_COLOR"}"
-SPACESHIP_GIT_BRANCH_ALERT_COLOR="${SPACESHIP_GIT_BRANCH_ALERT_COLOR="$SPACESHIP_GIT_ALERT_COLOR"}"
-SPACESHIP_GIT_STASH_COLOR="${SPACESHIP_GIT_STASH_COLOR="$SPACESHIP_GIT_STATUS_COLOR"}"
-SPACESHIP_GIT_STATUS_ACTION="${SPACESHIP_GIT_STATUS_ACTION=" "}"
-SPACESHIP_GIT_OMG_EXPANDED="${SPACESHIP_GIT_OMG_EXPANDED=true}"
+SPACESHIP_GIT_OMG_REBASE_TRACKING="${SPACESHIP_GIT_OMG_REBASE_TRACKING=" "}"
+if [[ $SPACESHIP_GIT_OMG_ICONS == true ]]; then
+  SPACESHIP_GIT_OMG_MERGE_TRACKING="${SPACESHIP_GIT_OMG_MERGE_TRACKING=" "}"
+else                                                                    # enhancement to OMG
+  SPACESHIP_GIT_OMG_MERGE_TRACKING="${SPACESHIP_GIT_OMG_MERGE_TRACKING=" "}"
+fi
+SPACESHIP_GIT_OMG_SHOW_UPSTREAM="${SPACESHIP_GIT_OMG_SHOW_UPSTREAM=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_TAG="${SPACESHIP_GIT_OMG_TAG="   "}"
 
 # ------------------------------------------------------------------------------
 # Section
 # ------------------------------------------------------------------------------
 
 enrich_append() {
-  [[ -z $2 ]] && return
-
   local flag=$1
-  local symbol=$2
-  local color=${3:-"$OMG_DEFAULT_COLOR"}
+  local indicator=$2
+  local color=$3
 
   if [[ $flag == false ]]; then
     [[ $SPACESHIP_GIT_OMG_EXPANDED == false ]] && return
-    symbol=' '
+    indicator=' '
   fi
 
-  echo -n "%{%B%F{$color}%}"             # set color
-  echo -n "${symbol}"                    # section content
-  echo -n "%{%B%F{$OMG_DEFAULT_COLOR}%}" # unset color
+  if [[ -n "$color" ]]; then
+    echo -n "%{%B%F{$color}%}"
+    echo -n "${indicator}"
+    echo -n "%{%B%F{$omg_color}%}"
+  else
+    echo -n "${indicator}"
+  fi
 }
 
 custom_build_prompt() {
@@ -118,81 +132,96 @@ custom_build_prompt() {
   local has_stashes=${22}
   local action=${23}
 
-  local omg_status omg_branch OMG_DEFAULT_COLOR="$SPACESHIP_GIT_STATUS_COLOR"
+  local omg_status omg_where omg_color omg_color_alert
 
-  # on filesystem
-  omg_status+=$(enrich_append $has_stashes $SPACESHIP_GIT_STATUS_STASHED "$SPACESHIP_GIT_STASH_COLOR")
+  if [[ $SPACESHIP_GIT_OMG_STATUS_SHOW == true ]]; then
+    omg_color="$SPACESHIP_GIT_OMG_STATUS_COLOR"
+    omg_color_alert="$SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR"
 
-  omg_status+=$(enrich_append $has_untracked_files $SPACESHIP_GIT_STATUS_UNTRACKED "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
-  omg_status+=$(enrich_append $has_modifications $SPACESHIP_GIT_STATUS_MODIFIED "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
-  omg_status+=$(enrich_append $has_deletions $SPACESHIP_GIT_STATUS_DELETED "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
+    # on filesystem
+    omg_status+=$(enrich_append $has_stashes "$SPACESHIP_GIT_OMG_STASHED" "$SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR_ALT")
 
-  # ready
-  omg_status+=$(enrich_append $has_adds $SPACESHIP_GIT_STATUS_ADDED)
-  omg_status+=$(enrich_append $has_modifications_cached $SPACESHIP_GIT_STATUS_HAS_CACHED_MODIFICATIONS)
-  omg_status+=$(enrich_append $has_deletions_cached $SPACESHIP_GIT_STATUS_HAS_CACHED_DELETIONS)
+    omg_status+=$(enrich_append $has_untracked_files "$SPACESHIP_GIT_OMG_UNTRACKED" "$omg_color_alert")
+    omg_status+=$(enrich_append $has_modifications "$SPACESHIP_GIT_OMG_MODIFIED" "$omg_color_alert")
+    omg_status+=$(enrich_append $has_deletions "$SPACESHIP_GIT_OMG_DELETED" "$omg_color_alert")
 
-  # next operation
-  omg_status+=$(enrich_append $ready_to_commit $SPACESHIP_GIT_STATUS_READY_TO_COMMIT "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
+    # ready
+    omg_status+=$(enrich_append $has_adds "$SPACESHIP_GIT_OMG_ADDED")
+    omg_status+=$(enrich_append $has_modifications_cached "$SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS")
+    omg_status+=$(enrich_append $has_deletions_cached "$SPACESHIP_GIT_OMG_CACHED_DELETIONS")
 
-  # current action
-  omg_status+=$(enrich_append $action "${SPACESHIP_GIT_STATUS_ACTION} $(get_current_action)" "$SPACESHIP_GIT_STATUS_ALERT_COLOR")
+    # next operation
+    omg_status+=$(enrich_append $ready_to_commit "$SPACESHIP_GIT_OMG_ALL_STAGED" "$omg_color_alert")
 
-  OMG_DEFAULT_COLOR="$SPACESHIP_GIT_BRANCH_COLOR"
+    # current action
+    omg_status+=$(enrich_append $action "${SPACESHIP_GIT_OMG_ACTION_PREFIX} $(get_current_action)" "$omg_color_alert")
+  fi
 
-  # where
-  if [[ $detached == true ]]; then
-    omg_branch+=$(enrich_append $detached $SPACESHIP_DETACHED "$SPACESHIP_GIT_BRANCH_ALERT_COLOR")
-    omg_branch+=$(enrich_append $detached " ${SPACESHIP_GIT_BRANCH_PREFIX}${current_commit_hash:0:7}${SPACESHIP_GIT_BRANCH_SUFFIX}")
-  else
-    if [[ $has_upstream == false ]]; then
-      if [[ $SPACESHIP_GIT_OMG_EXPANDED == true ]]; then
-        omg_branch+=$(enrich_append true "—${SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH}— ${SPACESHIP_GIT_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_BRANCH_SUFFIX}")
-      else
-        omg_branch+=$(enrich_append true "${SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH}${SPACESHIP_GIT_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_BRANCH_SUFFIX}")
-      fi
+  if [[ $SPACESHIP_GIT_OMG_WHERE_SHOW == true ]]; then
+    omg_color="$SPACESHIP_GIT_OMG_WHERE_COLOR"
+    omg_color_alert="$SPACESHIP_GIT_OMG_WHERE_ALERT_COLOR"
+
+    # where
+    if [[ $detached == true ]]; then
+      omg_where+=$(enrich_append $detached "$SPACESHIP_GIT_OMG_DETACHED" "$omg_color_alert")
+      omg_where+=$(enrich_append $detached "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_commit_hash:0:7}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
     else
-      if [[ $will_rebase == true ]]; then
-        local type_of_upstream=$SPACESHIP_GIT_STATUS_REBASE_TRACKING_BRANCH
-      else
-        local type_of_upstream=$SPACESHIP_GIT_STATUS_MERGE_TRACKING_BRANCH
-      fi
-
-      if [[ $has_diverged == true ]]; then
-        omg_branch+=$(enrich_append true "-${commits_behind} ${SPACESHIP_GIT_STATUS_DIVERGED}+${commits_ahead}" "$SPACESHIP_GIT_BRANCH_ALERT_COLOR")
-      else
-        if [[ $commits_behind -gt 0 ]]; then
-          omg_branch+=$(enrich_append true "-${commits_behind}")
-          omg_branch+=$(enrich_append true "${SPACESHIP_GIT_STATUS_BEHIND}" "$SPACESHIP_GIT_BRANCH_ALERT_COLOR")
-          [[ "$SPACESHIP_GIT_OMG_EXPANDED" == true ]] && omg_branch+=$(enrich_append true " —")
+      if [[ $has_upstream == false ]]; then
+        if [[ $SPACESHIP_GIT_OMG_EXPANDED == true ]]; then
+          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_COMMITS_PREFIX}—${SPACESHIP_GIT_OMG_NOT_TRACKED}—${SPACESHIP_GIT_OMG_COMMITS_SUFFIX}${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
+        else
+          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_NOT_TRACKED}${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
         fi
-        if [[ $commits_ahead -gt 0 ]]; then
-          [[ "$SPACESHIP_GIT_OMG_EXPANDED" == true ]] && omg_branch+=$(enrich_append true "—")
-          omg_branch+=$(enrich_append true "${SPACESHIP_GIT_STATUS_AHEAD}" "$SPACESHIP_GIT_BRANCH_ALERT_COLOR")
-          omg_branch+=$(enrich_append true "+${commits_ahead}")
-        fi
-        if [[ $SPACESHIP_GIT_OMG_EXPANDED == true && $commits_ahead == 0 && $commits_behind == 0 ]]; then
-          omg_branch+=$(enrich_append true "— —")
+      else
+        if [[ $will_rebase == true ]]; then
+          local type_of_upstream=$SPACESHIP_GIT_OMG_REBASE_TRACKING
+        else
+          local type_of_upstream=$SPACESHIP_GIT_OMG_MERGE_TRACKING
         fi
 
+        if [[ $has_diverged == true ]]; then
+          omg_where+=""
+          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_COMMITS_PREFIX}-${commits_behind}${SPACESHIP_GIT_OMG_DIVERGED}+${commits_ahead}${SPACESHIP_GIT_OMG_COMMITS_SUFFIX}" "$omg_color_alert")
+        else
+          if [[ $commits_behind -gt 0 ]]; then
+            omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_COMMITS_PREFIX}-${commits_behind}")
+            omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_BEHIND}" "$omg_color_alert")
+            [[ "$SPACESHIP_GIT_OMG_EXPANDED" == true ]] && omg_where+=$(enrich_append true "—")
+            omg_where+="$SPACESHIP_GIT_OMG_COMMITS_SUFFIX"
+          fi
+          if [[ $commits_ahead -gt 0 ]]; then
+            omg_where+="$SPACESHIP_GIT_OMG_COMMITS_PREFIX"
+            [[ $SPACESHIP_GIT_OMG_EXPANDED == true ]] && omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_COMMITS_PREFIX}—")
+            omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_AHEAD}" "$omg_color_alert")
+            omg_where+=$(enrich_append true "+${commits_ahead}${SPACESHIP_GIT_OMG_COMMITS_SUFFIX}")
+          fi
+          if [[ $SPACESHIP_GIT_OMG_EXPANDED == true && $commits_ahead == 0 && $commits_behind == 0 ]]; then
+            omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_COMMITS_PREFIX}— —${SPACESHIP_GIT_OMG_COMMITS_SUFFIX}")
+          fi
+        fi
+
+        if [[ $SPACESHIP_GIT_OMG_SHOW_UPSTREAM == true ]]; then
+          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch} ${type_of_upstream}${upstream//\/$current_branch/}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
+        else
+          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${type_of_upstream}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
+        fi
       fi
-      omg_branch+=$(enrich_append true " ${SPACESHIP_GIT_BRANCH_PREFIX}${current_branch}${type_of_upstream}${upstream//\/$current_branch/}${SPACESHIP_GIT_BRANCH_SUFFIX}")
     fi
-  fi
-  omg_branch+=$(enrich_append ${is_on_a_tag} "${SPACESHIP_GIT_STATUS_IS_ON_A_TAG} ${tag_at_current_commit}")
-
-  if [[ -n $omg_status ]]; then
-    # Status prefixes are colorized
-    spaceship::section \
-    "$SPACESHIP_GIT_STATUS_COLOR" \
-    "$SPACESHIP_GIT_STATUS_PREFIX${omg_status}$SPACESHIP_GIT_STATUS_SUFFIX"
+    [[ $is_on_a_tag == true ]] && omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_TAG}${tag_at_current_commit}")
   fi
 
-  if [[ -n $omg_branch ]]; then
+  if [[ -n "$omg_status" ]]; then
     # Status prefixes are colorized
     spaceship::section \
-    "$SPACESHIP_GIT_BRANCH_COLOR" \
-    "${omg_branch}"
+      "$SPACESHIP_GIT_OMG_STATUS_COLOR" \
+      "$SPACESHIP_GIT_OMG_PREFIX$SPACESHIP_GIT_OMG_STATUS_PREFIX${omg_status}$SPACESHIP_GIT_OMG_STATUS_SUFFIX"
+  fi
+
+  if [[ -n "$omg_where" && "$omg_where" != ' ' ]]; then
+    # Status prefixes are colorized
+    spaceship::section \
+      "$SPACESHIP_GIT_OMG_WHERE_COLOR" \
+      "$SPACESHIP_GIT_OMG_WHERE_PREFIX${omg_where}$SPACESHIP_GIT_OMG_WHERE_SUFFIX$SPACESHIP_GIT_OMG_SUFFIX"
   fi
 }
 
