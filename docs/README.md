@@ -12,6 +12,8 @@
   * [Git (git)](/docs/Options.md#git-git)
     * [Git branch (git_branch)](/docs/Options.md#git-branch-gitbranch)
     * [Git status (git_status)](/docs/Options.md#git-status-gitstatus)
+    * [Git index (git_index)](/docs/Options.md#git-index-gitindex)
+    * [oh-my-git (oh_my_git)](/docs/Options.md#oh-my-git_ohmygit)
   * [Mercurial (hg)](/docs/Options.md#mercurial-hg)
     * [Mercurial branch (hg_branch)](/docs/Options.md#mercurial-branch-hg_branch)
     * [Mercurial status (hg_status)](/docs/Options.md#mercurial-status-hg_status)
