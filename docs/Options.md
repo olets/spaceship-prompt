@@ -252,6 +252,7 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_OMG_MERGE_TRACKING` | `·` | `·`| Indicator for branch.<name>.rebase is not true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
 | `SPACESHIP_GIT_OMG_SHOW_UPSTREAM` | `true` | no change | Show the name of the upstream. If the upstream and local branch have the same name, only the remote's name will be shown |
 | `SPACESHIP_GIT_OMG_TAG` | `···` | no change | Indicator for a tag at the checked out commit (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_FULL_TAG_NAME` | `true` | no change | When `false`, tag names are limited to seven characters |
 
 ### Mercurial (`hg`)
 
