@@ -1,5 +1,5 @@
 #
-# Git status
+# oh-my-zsh Git status
 #
 
 # ------------------------------------------------------------------------------
@@ -12,21 +12,14 @@ source "$SPACESHIP_ROOT/sections/git_status_options.zsh"
 # Section
 # ------------------------------------------------------------------------------
 
-# We used to depend on OMZ git library,
-# but it doesn't handle many of the status indicator combinations
-# or index indicators.
-# Also, it's hard to maintain external dependency.
-# See PR #147 at https://git.io/vQkkB
+# oh-my-zsh's `git_prompt_status`, adapted for use by Spaceship prompt
+# https://github.com/robbyrussell/oh-my-zsh
 # See git help status to know more about status formats
-# See git help update-index to know more about index formats
-spaceship_git_status() {
+spaceship_git_status_oh_my_zsh() {
   [[ $SPACESHIP_GIT_STATUS_SHOW == false ]] && return
 
-  spaceship::is_git || return
+  local INDEX git_status=""
 
-  local FILES INDEX git_status=""
-
-  FILES=$(command git ls-files -v $(git rev-parse --show-toplevel))
   INDEX=$(command git status --porcelain -b 2> /dev/null)
 
   # Check for untracked files
@@ -34,30 +27,37 @@ spaceship_git_status() {
     git_status="$SPACESHIP_GIT_STATUS_UNTRACKED$git_status"
   fi
 
-  # Check for staged files
-  if $(echo "$INDEX" | command grep '^A[ MDAU] ' &> /dev/null); then
+  # Check for added files
+  if $(echo "$INDEX" | command grep '^A  ' &> /dev/null); then
     git_status="$SPACESHIP_GIT_STATUS_ADDED$git_status"
-  elif $(echo "$INDEX" | command grep '^UA' &> /dev/null); then
+  elif $(echo "$INDEX" | command grep '^M  ' &> /dev/null); then
+    git_status="$SPACESHIP_GIT_STATUS_ADDED$git_status"
+  elif $(echo "$INDEX" | command grep '^MM ' &> /dev/null); then
     git_status="$SPACESHIP_GIT_STATUS_ADDED$git_status"
   fi
 
   # Check for modified files
-  if $(echo "$INDEX" | command grep '^M[ MD] ' &> /dev/null); then
+  if $(echo "$INDEX" | command grep '^ M ' &> /dev/null); then
     git_status="$SPACESHIP_GIT_STATUS_MODIFIED$git_status"
-  elif $(echo "$INDEX" | command grep '^[ MARC]M ' &> /dev/null); then
-    # Copied status 'C' is never available with `git status`, See #364
+  elif $(echo "$INDEX" | command grep '^AM ' &> /dev/null); then
+    git_status="$SPACESHIP_GIT_STATUS_MODIFIED$git_status"
+  elif $(echo "$INDEX" | command grep '^MM ' &> /dev/null); then
+    git_status="$SPACESHIP_GIT_STATUS_MODIFIED$git_status"
+  elif $(echo "$INDEX" | command grep '^ T ' &> /dev/null); then
     git_status="$SPACESHIP_GIT_STATUS_MODIFIED$git_status"
   fi
 
   # Check for renamed files
-  if $(echo "$INDEX" | command grep '^R[ MD] ' &> /dev/null); then
+  if $(echo "$INDEX" | command grep '^R  ' &> /dev/null); then
     git_status="$SPACESHIP_GIT_STATUS_RENAMED$git_status"
   fi
 
   # Check for deleted files
-  if $(echo "$INDEX" | command grep '^[MARCDU ]D ' &> /dev/null); then
+  if $(echo "$INDEX" | command grep '^ D ' &> /dev/null); then
     git_status="$SPACESHIP_GIT_STATUS_DELETED$git_status"
-  elif $(echo "$INDEX" | command grep '^D[ UM] ' &> /dev/null); then
+  elif $(echo "$INDEX" | command grep '^D  ' &> /dev/null); then
+    git_status="$SPACESHIP_GIT_STATUS_DELETED$git_status"
+  elif $(echo "$INDEX" | command grep '^AD ' &> /dev/null); then
     git_status="$SPACESHIP_GIT_STATUS_DELETED$git_status"
   fi
 
@@ -67,13 +67,7 @@ spaceship_git_status() {
   fi
 
   # Check for unmerged files
-  if $(echo "$INDEX" | command grep '^U[UDA] ' &> /dev/null); then
-    git_status="$SPACESHIP_GIT_STATUS_UNMERGED$git_status"
-  elif $(echo "$INDEX" | command grep '^AA ' &> /dev/null); then
-    git_status="$SPACESHIP_GIT_STATUS_UNMERGED$git_status"
-  elif $(echo "$INDEX" | command grep '^DD ' &> /dev/null); then
-    git_status="$SPACESHIP_GIT_STATUS_UNMERGED$git_status"
-  elif $(echo "$INDEX" | command grep '^[DA]U ' &> /dev/null); then
+  if $(echo "$INDEX" | command grep '^UU ' &> /dev/null); then
     git_status="$SPACESHIP_GIT_STATUS_UNMERGED$git_status"
   fi
 
@@ -95,16 +89,6 @@ spaceship_git_status() {
   else
     [[ "$is_ahead" == true ]] && git_status="$SPACESHIP_GIT_STATUS_AHEAD$git_status"
     [[ "$is_behind" == true ]] && git_status="$SPACESHIP_GIT_STATUS_BEHIND$git_status"
-  fi
-
-  # Check whether any file has the --assume-unchanged bit set
-  if $(echo "$FILES" | grep '^[[:lower:]]' &> /dev/null); then
-    git_status="$SPACESHIP_GIT_STATUS_ASSUME_UNCHANGED$git_status"
-  fi
-
-  # Check whether any file has the --skip-worktree bit set
-  if $(echo "$FILES" | grep '^[sS]' &> /dev/null); then
-    git_status="$SPACESHIP_GIT_STATUS_SKIP_WORKTREE$git_status"
   fi
 
   if [[ -n $git_status ]]; then
