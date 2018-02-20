@@ -45,8 +45,6 @@ SPACESHIP_GIT_ALERT_COLOR="${SPACESHIP_GIT_ALERT_COLOR="yellow"}"
 SPACESHIP_GIT_STATUS_ALERT_COLOR="${SPACESHIP_GIT_STATUS_ALERT_COLOR="$SPACESHIP_GIT_ALERT_COLOR"}"
 SPACESHIP_GIT_BRANCH_ALERT_COLOR="${SPACESHIP_GIT_BRANCH_ALERT_COLOR="$SPACESHIP_GIT_ALERT_COLOR"}"
 SPACESHIP_GIT_STASH_COLOR="${SPACESHIP_GIT_STASH_COLOR="$SPACESHIP_GIT_STATUS_COLOR"}"
-# not supported by OMG
-# SPACESHIP_GIT_STATUS_NEEDS_TO_MERGE="${SPACESHIP_GIT_STATUS_NEEDS_TO_MERGE='ᄉ'}"
 
 # ------------------------------------------------------------------------------
 # Section
@@ -73,23 +71,22 @@ custom_build_prompt() {
   local current_branch=$4
   local detached=${5}
   local just_init=${6}
-  local has_upstream=${7}
-  local has_modifications=${8}
-  local has_modifications_cached=${9}
-  local has_adds=${10}
-  local has_deletions=${11}
-  local has_deletions_cached=${12}
-  local has_untracked_files=${13}
-  local ready_to_commit=${14}
-  local tag_at_current_commit=${15}
-  local is_on_a_tag=${16}
-  local has_upstream=${17}
-  local commits_ahead=${18}
-  local commits_behind=${19}
-  local has_diverged=${20}
-  local should_push=${21}
-  local will_rebase=${22}
-  local has_stashes=${23}
+  local has_modifications=${7}
+  local has_modifications_cached=${8}
+  local has_adds=${9}
+  local has_deletions=${10}
+  local has_deletions_cached=${11}
+  local has_untracked_files=${12}
+  local ready_to_commit=${13}
+  local tag_at_current_commit=${14}
+  local is_on_a_tag=${15}
+  local has_upstream=${16}
+  local commits_ahead=${17}
+  local commits_behind=${18}
+  local has_diverged=${19}
+  local should_push=${20}
+  local will_rebase=${21}
+  local has_stashes=${22}
 
   local omg_status omg_branch OMG_DEFAULT_COLOR="$SPACESHIP_GIT_STATUS_COLOR"
 
