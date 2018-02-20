@@ -208,6 +208,7 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_OMG_SUFFIX` | `` | Suffix after oh-my-git subsection |
 | `SPACESHIP_GIT_OMG_ICONS` | `true` | When possible, use [oh-my-git](https://github.com/arialdomartini/oh-my-git) flavored icons instead of Spaceship flavored icons |
 | `SPACESHIP_GIT_OMG_EXPANDED` | `true` | Leave a gap for inactive indicators, and display `—` for non-zero behind/ahead counts |
+| `SPACESHIP_GIT_OMG_HIDE_INACTIVE` | `true` | When `true`, inactive indicators are show, greyed out (overrides `SPACESHIP_GIT_OMG_EXPANDED=false`) |
 | `SPACESHIP_GIT_OMG_STATUS_FIRST` | `true` | Put the "status" part before the "where" part |
 
 ##### Status
