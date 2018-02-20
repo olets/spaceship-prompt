@@ -21,6 +21,7 @@ SPACESHIP_GIT_OMG_PREFIX="${SPACESHIP_GIT_OMG_PREFIX=""}" # enhancement to OMG
 SPACESHIP_GIT_OMG_SUFFIX="${SPACESHIP_GIT_OMG_SUFFIX=""}" # enhancement to OMG
 SPACESHIP_GIT_OMG_ICONS="${SPACESHIP_GIT_OMG_ICONS=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_EXPANDED="${SPACESHIP_GIT_OMG_EXPANDED=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_HIDE_INACTIVE="${SPACESHIP_GIT_OMG_HIDE_INACTIVE=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_STATUS_FIRST="${SPACESHIP_GIT_OMG_STATUS_FIRST=true}" # enhancement to OMG
 
 # Status
@@ -94,10 +95,15 @@ enrich_append() {
   local flag=$1
   local indicator=$2
   local color=$3
+  local override_hide_inactive=${4:-false}
 
   if [[ $flag == false ]]; then
-    [[ $SPACESHIP_GIT_OMG_EXPANDED == false ]] && return
-    indicator=' '
+    if [[ $override_hide_inactive == false && $SPACESHIP_GIT_OMG_HIDE_INACTIVE == false ]]; then
+      color="''"
+    else
+      [[ $SPACESHIP_GIT_OMG_EXPANDED == false ]] && return
+      indicator=' '
+    fi
   fi
 
   if [[ -n "$color" ]]; then
@@ -185,7 +191,7 @@ custom_build_prompt() {
     omg_status+=$(enrich_append $ready_to_commit "$SPACESHIP_GIT_OMG_ALL_STAGED" "$omg_color_alert")
 
     # current action
-    omg_status+=$(enrich_append $action "${SPACESHIP_GIT_OMG_ACTION_PREFIX} $(get_current_action)" "$omg_color_alert")
+    omg_status+=$(enrich_append $action "${SPACESHIP_GIT_OMG_ACTION_PREFIX} $(get_current_action)" "$omg_color_alert" true)
   fi
 
   if [[ $SPACESHIP_GIT_OMG_WHERE_SHOW == true ]]; then
