@@ -84,6 +84,7 @@ else                                                                    # enhanc
 fi
 SPACESHIP_GIT_OMG_SHOW_REMOTE="${SPACESHIP_GIT_OMG_SHOW_REMOTE=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_TAG="${SPACESHIP_GIT_OMG_TAG="   "}"
+SPACESHIP_GIT_OMG_FULL_TAG_NAME="${SPACESHIP_GIT_OMG_FULL_TAG_NAME=false}"
 
 # ------------------------------------------------------------------------------
 # Section
@@ -237,7 +238,12 @@ custom_build_prompt() {
         fi
       fi
     fi
-    [[ $is_on_a_tag == true ]] && omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_TAG}${tag_at_current_commit}")
+    if [[ $is_on_a_tag == true ]]; then
+      if [[ $SPACESHIP_GIT_OMG_FULL_TAG_NAME == false && $(echo ${tag_at_current_commit} | wc -m) -gt 7 ]]; then
+        tag_at_current_commit="${tag_at_current_commit:0:7}…"
+      fi
+      omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_TAG}${tag_at_current_commit}")
+    fi
   fi
 
   if [[ $SPACESHIP_GIT_OMG_STATUS_FIRST == true ]]; then
