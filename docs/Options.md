@@ -171,6 +171,7 @@ The other Git subsections shipped with Spaceship are
 | :--------- | ------- |
 | `status_oh_my_zsh` | Ported from [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), this is the Git status Spaceship used prior to v3.0. |
 | `status_actionable` | A Git status where icons show changes that are not in the index yet. Described in [PR #359](https://git.io/vACxq) |
+| `index` | Indicators related to `git-update-index` |
 
 #### Git branch (`git_branch`)
 
@@ -201,6 +202,11 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_STATUS_AHEAD` | `⇡` | Indicator for unpushed changes (ahead of remote branch) |
 | `SPACESHIP_GIT_STATUS_BEHIND` | `⇣` | Indicator for unpulled changes (behind of remote branch) |
 | `SPACESHIP_GIT_STATUS_DIVERGED` | `⇕` | Indicator for diverged chages (diverged with remote branch) |
+
+#### Git index (`git_index`)
+
+Git index indicators are shown only at least one file is flagged as assumed unchanged or skip worktree.
+
 | `SPACESHIP_GIT_STATUS_ASSUME_UNCHANGED` | `⤒` | Indicator for the presence of an `--assume-unchanged` file |
 | `SPACESHIP_GIT_STATUS_SKIP_WORKTREE` | `↧` | Indicator for the presence of a `--skip-worktree` file |
 
