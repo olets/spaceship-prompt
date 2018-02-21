@@ -84,6 +84,7 @@ else                                                                    # enhanc
   SPACESHIP_GIT_OMG_MERGE_TRACKING="${SPACESHIP_GIT_OMG_MERGE_TRACKING=" "}"
 fi
 SPACESHIP_GIT_OMG_SHOW_REMOTE="${SPACESHIP_GIT_OMG_SHOW_REMOTE=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_SHOW_ORIGIN="${SPACESHIP_GIT_OMG_SHOW_ORIGIN=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_TAG="${SPACESHIP_GIT_OMG_TAG="   "}"
 SPACESHIP_GIT_OMG_FULL_TAG_NAME="${SPACESHIP_GIT_OMG_FULL_TAG_NAME=false}"
 
@@ -237,8 +238,10 @@ custom_build_prompt() {
           fi
         fi
 
-        if [[ $SPACESHIP_GIT_OMG_SHOW_REMOTE == true ]]; then
-          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch} ${type_of_upstream}${upstream//\/$current_branch/}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
+        upstream=${upstream//\/$current_branch/}
+        [[ $SPACESHIP_GIT_OMG_SHOW_ORIGIN == false ]] && upstream=${upstream//origin/}
+        if [[ $SPACESHIP_GIT_OMG_SHOW_REMOTE == true && -n "$upstream" ]]; then
+          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch} ${type_of_upstream}${upstream}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
         else
           omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${type_of_upstream}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
         fi
