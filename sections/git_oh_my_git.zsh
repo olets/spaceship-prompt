@@ -84,6 +84,7 @@ else                                                                    # enhanc
   SPACESHIP_GIT_OMG_MERGE_TRACKING="${SPACESHIP_GIT_OMG_MERGE_TRACKING=" "}"
 fi
 SPACESHIP_GIT_OMG_SHOW_UPSTREAM="${SPACESHIP_GIT_OMG_SHOW_UPSTREAM=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME="${SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_TAG="${SPACESHIP_GIT_OMG_TAG="   "}"
 SPACESHIP_GIT_OMG_FULL_TAG_NAME="${SPACESHIP_GIT_OMG_FULL_TAG_NAME=false}"
 
@@ -195,6 +196,7 @@ custom_build_prompt() {
   fi
 
   if [[ $SPACESHIP_GIT_OMG_WHERE_SHOW == true ]]; then
+
     omg_color="$SPACESHIP_GIT_OMG_WHERE_COLOR"
     omg_color_alert="$SPACESHIP_GIT_OMG_WHERE_ALERT_COLOR"
 
@@ -237,11 +239,15 @@ custom_build_prompt() {
           fi
         fi
 
+        local omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${type_of_upstream}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
         if [[ $SPACESHIP_GIT_OMG_SHOW_UPSTREAM == true ]]; then
-          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch} ${type_of_upstream}${upstream//\/$current_branch/}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
-        else
-          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${type_of_upstream}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
+          if [[ $SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME == true && "$upstream" == "origin/${current_branch}" ]]; then
+            omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch} ${type_of_upstream}origin${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
+          elif [[ "$upstream" != "origin/${current_branch}" ]]; then
+            omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch} ${type_of_upstream}${upstream}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
+          fi
         fi
+        omg_where+=$(enrich_append true $omg_branch)
       fi
     fi
     if [[ $is_on_a_tag == true ]]; then

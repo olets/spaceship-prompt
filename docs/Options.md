@@ -266,6 +266,7 @@ Git index indicators are shown only at least one file is flagged as assumed unch
 | `SPACESHIP_GIT_OMG_REBASE_TRACKING` | `·` | no change | Indicator for branch.<name>.rebase is true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
 | `SPACESHIP_GIT_OMG_MERGE_TRACKING` | `·` | `·`| no change | Indicator for branch.<name>.rebase is not true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
 | `SPACESHIP_GIT_OMG_SHOW_UPSTREAM` | `true` | no change | Show the name of the upstream. If the upstream and local branch have the same name, only the remote's name will be shown |
+| `SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME` | `true` | no change | Show the name of the upstream when it is `origin/<local-branch-name>`. Overridden by `SPACESHIP_GIT_OMG_SHOW_UPSTREAM=false` |
 | `SPACESHIP_GIT_OMG_TAG` | `···` | no change | Indicator for a tag at the checked out commit (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
 | `SPACESHIP_GIT_OMG_FULL_TAG_NAME` | `true` | no change | When `false`, tag names are limited to seven characters |
 
