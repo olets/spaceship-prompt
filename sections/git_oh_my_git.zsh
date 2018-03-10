@@ -86,7 +86,10 @@ fi
 SPACESHIP_GIT_OMG_SHOW_UPSTREAM="${SPACESHIP_GIT_OMG_SHOW_UPSTREAM=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME="${SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_TAG="${SPACESHIP_GIT_OMG_TAG="   "}"
-SPACESHIP_GIT_OMG_FULL_TAG_NAME="${SPACESHIP_GIT_OMG_FULL_TAG_NAME=false}"
+SPACESHIP_GIT_OMG_TAG_FULL_NAME="${SPACESHIP_GIT_OMG_TAG_FULL_NAME=false}" # enhancement to OMG
+SPACESHIP_GIT_OMG_TAG_MAX_LENGTH="${SPACESHIP_GIT_OMG_TAG_MAX_LENGTH=10}" # enhancement to OMG
+SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH="${SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH=4}" # enhancement to OMG
+SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH="${SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH=3}" # enhancement to OMG
 
 # ------------------------------------------------------------------------------
 # Section
@@ -251,8 +254,11 @@ custom_build_prompt() {
       fi
     fi
     if [[ $is_on_a_tag == true ]]; then
-      if [[ $SPACESHIP_GIT_OMG_FULL_TAG_NAME == false && $(echo ${tag_at_current_commit} | wc -m) -gt 7 ]]; then
-        tag_at_current_commit="${tag_at_current_commit:0:7}…"
+      local omg_tag_length=${#tag_at_current_commit}
+      if [[ $SPACESHIP_GIT_OMG_TAG_FULL_NAME == false && omg_tag_length -gt SPACESHIP_GIT_OMG_TAG_MAX_LENGTH ]]; then
+        if [[ $omg_tag_length -gt (( $SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH + $SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH )) ]]; then
+          tag_at_current_commit="${tag_at_current_commit:0:$SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH}…${tag_at_current_commit:(-$SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH)}"
+        fi
       fi
       omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_TAG}${tag_at_current_commit}")
     fi
