@@ -211,6 +211,7 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_STATUS_ALERT_COLOR` | `$SPACESHIP_GIT_ALERT_COLOR` | Color of alerts in the oh-my-git git status |
 | `SPACESHIP_GIT_BRANCH_ALERT_COLOR` | `$SPACESHIP_GIT_ALERT_COLOR` | Color of alerts in the oh-my-git git branch |
 | `SPACESHIP_GIT_STASH_COLOR` | `$SPACESHIP_GIT_STATUS_COLOR` | Color of the oh-my-git stash indicator |
+| `SPACESHIP_GIT_OMG_EXPANDED` | `true` | Leave a gap for inactive indicators, and display `—` for non-zero behind/ahead counts |
 
 ### Mercurial (`hg`)
 

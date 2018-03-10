@@ -46,6 +46,7 @@ SPACESHIP_GIT_STATUS_ALERT_COLOR="${SPACESHIP_GIT_STATUS_ALERT_COLOR="$SPACESHIP
 SPACESHIP_GIT_BRANCH_ALERT_COLOR="${SPACESHIP_GIT_BRANCH_ALERT_COLOR="$SPACESHIP_GIT_ALERT_COLOR"}"
 SPACESHIP_GIT_STASH_COLOR="${SPACESHIP_GIT_STASH_COLOR="$SPACESHIP_GIT_STATUS_COLOR"}"
 SPACESHIP_GIT_STATUS_ACTION="${SPACESHIP_GIT_STATUS_ACTION=" "}"
+SPACESHIP_GIT_OMG_EXPANDED="${SPACESHIP_GIT_OMG_EXPANDED=true}"
 
 # ------------------------------------------------------------------------------
 # Section
@@ -58,7 +59,10 @@ enrich_append() {
   local symbol=$2
   local color=${3:-"$OMG_DEFAULT_COLOR"}
 
-  [[ $flag == false ]] && symbol=' '
+  if [[ $flag == false ]]; then
+    [[ $SPACESHIP_GIT_OMG_EXPANDED == false ]] && return
+    symbol=' '
+  fi
 
   echo -n "%{%B%F{$color}%}"             # set color
   echo -n "${symbol}"                    # section content
@@ -118,7 +122,11 @@ custom_build_prompt() {
     omg_branch+=$(enrich_append $detached " ${SPACESHIP_GIT_BRANCH_PREFIX}${current_commit_hash:0:7}${SPACESHIP_GIT_BRANCH_SUFFIX}")
   else
     if [[ $has_upstream == false ]]; then
-      omg_branch+=$(enrich_append true "—${SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH}— ${SPACESHIP_GIT_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_BRANCH_SUFFIX}")
+      if [[ $SPACESHIP_GIT_OMG_EXPANDED == true ]]; then
+        omg_branch+=$(enrich_append true "—${SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH}— ${SPACESHIP_GIT_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_BRANCH_SUFFIX}")
+      else
+        omg_branch+=$(enrich_append true "${SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH}${SPACESHIP_GIT_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_BRANCH_SUFFIX}")
+      fi
     else
       if [[ $will_rebase == true ]]; then
         local type_of_upstream=$SPACESHIP_GIT_STATUS_REBASE_TRACKING_BRANCH
@@ -132,14 +140,14 @@ custom_build_prompt() {
         if [[ $commits_behind -gt 0 ]]; then
           omg_branch+=$(enrich_append true "-${commits_behind}")
           omg_branch+=$(enrich_append true "${SPACESHIP_GIT_STATUS_BEHIND}" "$SPACESHIP_GIT_BRANCH_ALERT_COLOR")
-          omg_branch+=$(enrich_append true " —")
+          [[ "$SPACESHIP_GIT_OMG_EXPANDED" == true ]] && omg_branch+=$(enrich_append true " —")
         fi
         if [[ $commits_ahead -gt 0 ]]; then
-          omg_branch+=$(enrich_append true "—")
+          [[ "$SPACESHIP_GIT_OMG_EXPANDED" == true ]] && omg_branch+=$(enrich_append true "—")
           omg_branch+=$(enrich_append true "${SPACESHIP_GIT_STATUS_AHEAD}" "$SPACESHIP_GIT_BRANCH_ALERT_COLOR")
           omg_branch+=$(enrich_append true "+${commits_ahead}")
         fi
-        if [[ $commits_ahead == 0 && $commits_behind == 0 ]]; then
+        if [[ $SPACESHIP_GIT_OMG_EXPANDED == true && $commits_ahead == 0 && $commits_behind == 0 ]]; then
           omg_branch+=$(enrich_append true "— —")
         fi
 
