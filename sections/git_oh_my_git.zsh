@@ -83,13 +83,18 @@ if [[ $SPACESHIP_GIT_OMG_ICONS == true ]]; then
 else                                                                    # enhancement to OMG
   SPACESHIP_GIT_OMG_MERGE_TRACKING="${SPACESHIP_GIT_OMG_MERGE_TRACKING=" "}"
 fi
+SPACESHIP_GIT_OMG_BRANCH_FULL_NAME="${SPACESHIP_GIT_OMG_BRANCH_FULL_NAME=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_BRANCH_TRUNCATE_AFTER="${SPACESHIP_GIT_OMG_BRANCH_TRUNCATE_AFTER=10}" # enhancement to OMG
+SPACESHIP_GIT_OMG_BRANCH_HEAD_LENGTH="${SPACESHIP_GIT_OMG_BRANCH_HEAD_LENGTH=4}" # enhancement to OMG
+SPACESHIP_GIT_OMG_BRANCH_TAIL_LENGTH="${SPACESHIP_GIT_OMG_BRANCH_TAIL_LENGTH=3}" # enhancement to OMG
 SPACESHIP_GIT_OMG_SHOW_UPSTREAM="${SPACESHIP_GIT_OMG_SHOW_UPSTREAM=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME="${SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME=true}" # enhancement to OMG
 SPACESHIP_GIT_OMG_TAG="${SPACESHIP_GIT_OMG_TAG="   "}"
-SPACESHIP_GIT_OMG_TAG_FULL_NAME="${SPACESHIP_GIT_OMG_TAG_FULL_NAME=false}" # enhancement to OMG
-SPACESHIP_GIT_OMG_TAG_MAX_LENGTH="${SPACESHIP_GIT_OMG_TAG_MAX_LENGTH=10}" # enhancement to OMG
-SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH="${SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH=4}" # enhancement to OMG
-SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH="${SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH=3}" # enhancement to OMG
+SPACESHIP_GIT_OMG_TAG_FULL_NAME="${SPACESHIP_GIT_OMG_TAG_FULL_NAME="$SPACESHIP_GIT_OMG_BRANCH_FULL_NAME"}" # enhancement to OMG
+SPACESHIP_GIT_OMG_TAG_TRUCATE_AFTER="${SPACESHIP_GIT_OMG_TAG_TRUCATE_AFTER="$SPACESHIP_GIT_OMG_BRANCH_TRUNCATE_AFTER"}" # enhancement to OMG
+SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH="${SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH="$SPACESHIP_GIT_OMG_BRANCH_HEAD_LENGTH"}" # enhancement to OMG
+SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH="${SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH="$SPACESHIP_GIT_OMG_BRANCH_TAIL_LENGTH"}" # enhancement to OMG
+# SPACESHIP_GIT_OMG_TRIM_BRANCH_NAME="${SPACESHIP_GIT_OMG_TRIM_BRANCH_NAME=false}"
 
 # ------------------------------------------------------------------------------
 # Section
@@ -117,6 +122,22 @@ enrich_append() {
   else
     echo -n "${indicator}"
   fi
+}
+
+truncate_string() {
+  local string=$1
+  local max_length=$2
+
+  if [[ ${#string} -gt $max_length ]]; then
+    local char_count_head=$3
+    local char_count_tail=$4
+
+    if [[ ${#string} -gt (( $char_count_head + $char_count_tail )) ]]; then
+      string="${string:0:$char_count_head}…${string:(-$char_count_tail)}"
+    fi
+  fi
+
+  echo -n $string
 }
 
 spaceship_git_oh_my_git_status() {
@@ -208,11 +229,17 @@ custom_build_prompt() {
       omg_where+=$(enrich_append $detached "$SPACESHIP_GIT_OMG_DETACHED" "$omg_color_alert")
       omg_where+=$(enrich_append $detached "${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_commit_hash:0:7}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
     else
+      local display_branch
+      if [[ $SPACESHIP_GIT_OMG_BRANCH_FULL_NAME == false ]]; then
+        display_branch=$(truncate_string $current_branch $SPACESHIP_GIT_OMG_BRANCH_TRUNCATE_AFTER $SPACESHIP_GIT_OMG_BRANCH_HEAD_LENGTH $SPACESHIP_GIT_OMG_BRANCH_TAIL_LENGTH)
+      fi
+      display_branch=${display_branch:=$current_branch}
+
       if [[ $has_upstream == false ]]; then
         if [[ $SPACESHIP_GIT_OMG_EXPANDED == true ]]; then
-          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_COMMITS_PREFIX}—${SPACESHIP_GIT_OMG_NOT_TRACKED}—${SPACESHIP_GIT_OMG_COMMITS_SUFFIX}${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
+          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_COMMITS_PREFIX}—${SPACESHIP_GIT_OMG_NOT_TRACKED}—${SPACESHIP_GIT_OMG_COMMITS_SUFFIX}${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${display_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
         else
-          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_NOT_TRACKED}${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
+          omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_NOT_TRACKED}${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${display_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}")
         fi
       else
         if [[ $will_rebase == true ]]; then
@@ -242,23 +269,20 @@ custom_build_prompt() {
           fi
         fi
 
-        local omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${type_of_upstream}${current_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
+        local omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${type_of_upstream}${display_branch}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
         if [[ $SPACESHIP_GIT_OMG_SHOW_UPSTREAM == true ]]; then
           if [[ $SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME == true && "$upstream" == "origin/${current_branch}" ]]; then
-            omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch} ${type_of_upstream}origin${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
+            omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${display_branch} ${type_of_upstream}origin${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
           elif [[ "$upstream" != "origin/${current_branch}" ]]; then
-            omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${current_branch} ${type_of_upstream}${upstream}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
+            omg_branch="${SPACESHIP_GIT_OMG_WHERE_BRANCH_PREFIX}${display_branch} ${type_of_upstream}${upstream}${SPACESHIP_GIT_OMG_WHERE_BRANCH_SUFFIX}"
           fi
         fi
         omg_where+=$(enrich_append true $omg_branch)
       fi
     fi
     if [[ $is_on_a_tag == true ]]; then
-      local omg_tag_length=${#tag_at_current_commit}
-      if [[ $SPACESHIP_GIT_OMG_TAG_FULL_NAME == false && omg_tag_length -gt SPACESHIP_GIT_OMG_TAG_MAX_LENGTH ]]; then
-        if [[ $omg_tag_length -gt (( $SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH + $SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH )) ]]; then
-          tag_at_current_commit="${tag_at_current_commit:0:$SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH}…${tag_at_current_commit:(-$SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH)}"
-        fi
+      if [[ $SPACESHIP_GIT_OMG_TAG_FULL_NAME == false ]]; then
+        tag_at_current_commit=$(truncate_string $tag_at_current_commit $SPACESHIP_GIT_OMG_TAG_TRUCATE_AFTER $SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH $SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH)
       fi
       omg_where+=$(enrich_append true "${SPACESHIP_GIT_OMG_TAG}${tag_at_current_commit}")
     fi
