@@ -165,7 +165,12 @@ SPACESHIP_GIT_ORDER=(
 )
 ```
 
-The other Git subsection shipped with Spaceship is `status_oh_my_zsh`. Ported from [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), this is the Git status Spaceship used prior to v3.0.
+The other Git subsections shipped with Spaceship are
+
+| Subsection | Meaning |
+| :--------- | ------- |
+| `status_oh_my_zsh` | Ported from [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), this is the Git status Spaceship used prior to v3.0. |
+| `status_actionable` | A Git status where icons show changes that are not in the index yet. Described in [PR #359](https://git.io/vACxq) |
 
 #### Git branch (`git_branch`)
 
