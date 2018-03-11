@@ -165,6 +165,8 @@ SPACESHIP_GIT_ORDER=(
 )
 ```
 
+The other Git subsection shipped with Spaceship is `oh_my_git`. Ported from [oh-my-git](https://github.com/arialdomartini/oh-my-git), a complete Git prompt including status and branch info.
+
 #### Git branch (`git_branch`)
 
 | Variable | Default | Meaning |
@@ -194,6 +196,21 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_STATUS_AHEAD` | `⇡` | Indicator for unpushed changes (ahead of remote branch) |
 | `SPACESHIP_GIT_STATUS_BEHIND` | `⇣` | Indicator for unpulled changes (behind of remote branch) |
 | `SPACESHIP_GIT_STATUS_DIVERGED` | `⇕` | Indicator for diverged chages (diverged with remote branch) |
+
+#### oh-my-git (`oh_my_git`)
+
+| `SPACESHIP_GIT_STATUS_HAS_CACHED_DELETIONS` | `·` | no change | Indicator for staged deletions (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_STATUS_HAS_CACHED_MODIFICATIONS` | `·` | no change | Indicator for staged modifications (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_STATUS_READY_TO_COMMIT` | `·` | no change | Indicator that all changes have been staged (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_STATUS_IS_ON_A_TAG` | `···` | no change | Indicator for a tag at the checked out commit (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_DETACHED` | `···` | no change | Indicator for a detached HEAD (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH` | `··` | Indicator for no remote branch (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_STATUS_REBASE_TRACKING_BRANCH` | `·` |  Indicator for branch.<name>.rebase is true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_STATUS_MERGE_TRACKING_BRANCH` | `·` | Indicator for branch.<name>.rebase is not true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_ALERT_COLOR` | `yellow` | Color of oh-my-git alerts |
+| `SPACESHIP_GIT_STATUS_ALERT_COLOR` | `$SPACESHIP_GIT_ALERT_COLOR` | Color of alerts in the oh-my-git git status |
+| `SPACESHIP_GIT_BRANCH_ALERT_COLOR` | `$SPACESHIP_GIT_ALERT_COLOR` | Color of alerts in the oh-my-git git branch |
+| `SPACESHIP_GIT_STASH_COLOR` | `$SPACESHIP_GIT_STATUS_COLOR` | Color of the oh-my-git stash indicator |
 
 ### Mercurial (`hg`)
 
