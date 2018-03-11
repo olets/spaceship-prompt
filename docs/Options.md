@@ -165,6 +165,8 @@ SPACESHIP_GIT_ORDER=(
 )
 ```
 
+The other Git subsection shipped with Spaceship is `status_actionable`, a Git status where icons show changes that are not in the index yet. Described in [PR #359](https://git.io/vACxq)
+
 #### Git branch (`git_branch`)
 
 | Variable | Default | Meaning |
