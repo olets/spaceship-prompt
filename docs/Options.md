@@ -256,7 +256,8 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_OMG_BRANCH_HEAD_LENGTH` | 4 | no change | If `SPACESHIP_GIT_OMG_BRANCH_FULL_NAME` is `false`, show this many characters from the start of branch names longer than `SPACESHIP_GIT_OMG_BRANCH_MAX_LENGTH` characters |
 | `SPACESHIP_GIT_OMG_BRANCH_TAIL_LENGTH` | 3 | no change | If `SPACESHIP_GIT_OMG_BRANCH_FULL_NAME` is `false`, show this many characters from the end of branch names longer than `SPACESHIP_GIT_OMG_BRANCH_MAX_LENGTH` characters |
 | `SPACESHIP_GIT_OMG_SHOW_UPSTREAM` | `true` | no change | Show the name of the upstream. If the upstream and local branch have the same name, only the remote's name will be shown |
-| `SPACESHIP_GIT_OMG_SHOW_UPSTREAM_ORIGINSAME` | `true` | no change | Show the name of the upstream when it is `origin/<local-branch-name>`. Overridden by `SPACESHIP_GIT_OMG_SHOW_UPSTREAM=false` |
+| `SPACESHIP_GIT_OMG_DEFAULT_REMOTE` | `origin` | no change | Used by `SPACESHIP_GIT_OMG_SHOW_UPSTREAM_DEFAULTSAME` |
+| `SPACESHIP_GIT_OMG_SHOW_UPSTREAM_DEFAULTSAME` | `true` | no change | Show the name of the upstream when it is `SPACESHIP_GIT_OMG_DEFAULT_REMOTE/<local-branch-name>`. Overridden by `SPACESHIP_GIT_OMG_SHOW_UPSTREAM=false` |
 | `SPACESHIP_GIT_OMG_TAG` | `···` | no change | Indicator for a tag at the checked out commit (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
 | `SPACESHIP_GIT_OMG_TAG_FULL_NAME` | `$SPACESHIP_GIT_OMG_BRANCH_FULL_NAME` | no change | When `false`, tag names longer than the sum of `SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH` and `SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH` are truncated |
 | `SPACESHIP_GIT_OMG_TAG_MAX_LENGTH` | `$SPACESHIP_GIT_OMG_BRANCH_MAX_LENGTH` | no change | If `SPACESHIP_GIT_OMG_TAG_FULL_NAME` is `false`, truncate tag names longer than this many characters |
