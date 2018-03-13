@@ -56,12 +56,6 @@ get_current_action() {
 }
 
 build_prompt() {
-  local enabled=`git config --get oh-my-git.enabled`
-  if [[ ${enabled} == false ]]; then
-    echo "${PSORG}"
-    exit;
-  fi
-
   local prompt=""
 
   # Git info
