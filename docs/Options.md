@@ -206,18 +206,70 @@ Git status indicators is shown only when you have dirty repository.
 
 #### oh-my-git (`oh_my_git`)
 
-| `SPACESHIP_GIT_STATUS_HAS_CACHED_DELETIONS` | `·` | no change | Indicator for staged deletions (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
-| `SPACESHIP_GIT_STATUS_HAS_CACHED_MODIFICATIONS` | `·` | no change | Indicator for staged modifications (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
-| `SPACESHIP_GIT_STATUS_READY_TO_COMMIT` | `·` | no change | Indicator that all changes have been staged (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
-| `SPACESHIP_GIT_STATUS_IS_ON_A_TAG` | `···` | no change | Indicator for a tag at the checked out commit (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
-| `SPACESHIP_DETACHED` | `···` | no change | Indicator for a detached HEAD (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
-| `SPACESHIP_GIT_STATUS_NOT_TRACKED_BRANCH` | `··` | Indicator for no remote branch (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
-| `SPACESHIP_GIT_STATUS_REBASE_TRACKING_BRANCH` | `·` |  Indicator for branch.<name>.rebase is true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
-| `SPACESHIP_GIT_STATUS_MERGE_TRACKING_BRANCH` | `·` | Indicator for branch.<name>.rebase is not true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
-| `SPACESHIP_GIT_ALERT_COLOR` | `yellow` | Color of oh-my-git alerts |
-| `SPACESHIP_GIT_STATUS_ALERT_COLOR` | `$SPACESHIP_GIT_ALERT_COLOR` | Color of alerts in the oh-my-git git status |
-| `SPACESHIP_GIT_BRANCH_ALERT_COLOR` | `$SPACESHIP_GIT_ALERT_COLOR` | Color of alerts in the oh-my-git git branch |
-| `SPACESHIP_GIT_STASH_COLOR` | `$SPACESHIP_GIT_STATUS_COLOR` | Color of the oh-my-git stash indicator |
+##### General
+
+| Variable | Default | Meaning |
+| :------- | :-----: | :-----: | ------- |
+| `SPACESHIP_GIT_ALERT_COLOR` | `yellow` | Color of oh-my-git Git section alerts |
+| `SPACESHIP_GIT_OMG_PREFIX` | `` | Prefix before oh-my-git subsection |
+| `SPACESHIP_GIT_OMG_SUFFIX` | `` | Suffix after oh-my-git subsection |
+| `SPACESHIP_GIT_OMG_ICONS` | `true` | When possible, use [oh-my-git](https://github.com/arialdomartini/oh-my-git) flavored icons instead of Spaceship flavored icons |
+| `SPACESHIP_GIT_OMG_EXPANDED` | `true` | Leave a gap for inactive indicators, and display `—` for non-zero behind/ahead counts |
+| `SPACESHIP_GIT_OMG_HIDE_INACTIVE` | `true` | When `true`, inactive indicators are show, greyed out (overrides `SPACESHIP_GIT_OMG_EXPANDED=false`) |
+| `SPACESHIP_GIT_OMG_STATUS_FIRST` | `true` | Put the "status" part before the "where" part |
+
+##### Status
+
+| Variable | Default | If OMG icons `false` | Meaning |
+| :------- | :-----: | :-----: | ------- |
+| `SPACESHIP_GIT_OMG_STATUS_SHOW` | `true` | no change | Show Git status part of oh-my-git |
+| `SPACESHIP_GIT_OMG_STATUS_COLOR` | `red` | no change | Color of status part of oh-my-git |
+| `SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR` | `$SPACESHIP_GIT_ALERT_COLOR` | no change | Color of alerts in status part of oh-my-git |
+| `SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR_ALT` | `blue` | no change | Color of stash indicator |
+| `SPACESHIP_GIT_OMG_STATUS_PREFIX` |`··` | `[` | Prefix before status part of oh-my-git (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_STATUS_SUFFIX` | `` | `·]·` | Suffix after status part of oh-my-git |
+| `SPACESHIP_GIT_OMG_STASHED` | `·` | `$` | Indicator for stashed changes (OMG icon requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_UNTRACKED` | `·` | `?` | Indicator for untracked changes (OMG icon requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_MODIFIED` | `·` | `!` | Indicator for unstaged modifications (OMG icon requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_DELETED` | `·` | `✘·` | Indicator for deleted files (OMG icon requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_ADDED` | `·` | `+` | Indicator for added changes (OMG icon requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS` | `·` | no change | Indicator for staged modifications (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_CACHED_DELETIONS` | `·` | no change | Indicator for staged deletions (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_ALL_STAGED` | `·` | no change | Indicator that all changes have been staged (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_ACTION_PREFIX` | `··` | no change | Prefix before the current Git action (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+
+##### Where
+
+| Variable | Default | If OMG icons `false` | Meaning |
+| :------- | :-----: | :-----: | ------- |
+| `SPACESHIP_GIT_OMG_WHERE_SHOW` | `true` | no change | Show branch part of oh-my-git |
+| `SPACESHIP_GIT_OMG_WHERE_COLOR` | `magenta` | no change | Color of branch part of oh-my-git |
+| `SPACESHIP_GIT_OMG_WHERE_ALERT_COLOR` | `$SPACESHIP_GIT_ALERT_COLOR` | no change | Color of alerts in branch part of oh-my-git |
+| `SPACESHIP_GIT_OMG_WHERE_PREFIX` | `(` | ``  | Prefix before branch part of oh-my-git |
+| `SPACESHIP_GIT_OMG_WHERE_SUFFIX` | `)` | `` | Suffix after branch part of oh-my-git |
+| `SPACESHIP_GIT_OMG_DETACHED` | `···` | no change | Indicator for a detached HEAD (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_BRANCH_NOT_TRACKED` | `··` | no change | Indicator for no remote branch (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_COMMITS_PREFIX` | `·` | no change | Prefix before the local v. remote commit counts |
+| `SPACESHIP_GIT_OMG_COMMITS_SUFFIX` | `·` | no change | Suffix after the local v. remote commit counts |
+| `SPACESHIP_GIT_OMG_DIVERGED` | `·` | `⇕·` | Indicator for diverged changes (diverged with remote branch) (OMG icon requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_BEHIND` | `·` | `⇣·` | Indicator for unpulled changes (behind of remote branch) (OMG icon requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_AHEAD` | `··` | `⇡·` | Indicator for unpushed changes (ahead of remote branch) (OMG icon requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_BRANCH_PREFIX` | `(` | ``  | Prefix before branch part of oh-my-git |
+| `SPACESHIP_GIT_OMG_BRANCH_SUFFIX` | `)` | `` | Suffix after branch part of oh-my-git |
+| `SPACESHIP_GIT_OMG_REBASE_TRACKING` | `·` | no change | Indicator for branch.<name>.rebase is true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_MERGE_TRACKING` | `·` | `·`| Indicator for branch.<name>.rebase is not true (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_BRANCH_FULL_NAME` | `false` | no change | When `false`, tag names longer than the sum of `SPACESHIP_GIT_OMG_BRANCH_HEAD_LENGTH` and `SPACESHIP_GIT_OMG_BRANCH_TAIL_LENGTH` are truncated |
+| `SPACESHIP_GIT_OMG_BRANCH_MAX_LENGTH` | 10 | no change | If `SPACESHIP_GIT_OMG_BRANCH_FULL_NAME` is `false`, truncate branch names longer than this many characters |
+| `SPACESHIP_GIT_OMG_BRANCH_HEAD_LENGTH` | 4 | no change | If `SPACESHIP_GIT_OMG_BRANCH_FULL_NAME` is `false`, show this many characters from the start of branch names longer than `SPACESHIP_GIT_OMG_BRANCH_MAX_LENGTH` characters |
+| `SPACESHIP_GIT_OMG_BRANCH_TAIL_LENGTH` | 3 | no change | If `SPACESHIP_GIT_OMG_BRANCH_FULL_NAME` is `false`, show this many characters from the end of branch names longer than `SPACESHIP_GIT_OMG_BRANCH_MAX_LENGTH` characters |
+| `SPACESHIP_GIT_OMG_SHOW_UPSTREAM` | `true` | no change | Show the name of the upstream. If the upstream and local branch have the same name, only the remote's name will be shown |
+| `SPACESHIP_GIT_OMG_DEFAULT_REMOTE` | `origin` | no change | Used by `SPACESHIP_GIT_OMG_SHOW_UPSTREAM_DEFAULTSAME` |
+| `SPACESHIP_GIT_OMG_SHOW_UPSTREAM_DEFAULTSAME` | `true` | no change | Show the name of the upstream when it is `SPACESHIP_GIT_OMG_DEFAULT_REMOTE/<local-branch-name>`. Overridden by `SPACESHIP_GIT_OMG_SHOW_UPSTREAM=false` |
+| `SPACESHIP_GIT_OMG_TAG` | `···` | no change | Indicator for a tag at the checked out commit (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
+| `SPACESHIP_GIT_OMG_TAG_FULL_NAME` | `$SPACESHIP_GIT_OMG_BRANCH_FULL_NAME` | no change | When `false`, tag names longer than the sum of `SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH` and `SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH` are truncated |
+| `SPACESHIP_GIT_OMG_TAG_MAX_LENGTH` | `$SPACESHIP_GIT_OMG_BRANCH_MAX_LENGTH` | no change | If `SPACESHIP_GIT_OMG_TAG_FULL_NAME` is `false`, truncate tag names longer than this many characters |
+| `SPACESHIP_GIT_OMG_TAG_HEAD_LENGTH` | `$SPACESHIP_GIT_OMG_BRANCH_HEAD_LENGTH` | no change | If `SPACESHIP_GIT_OMG_TAG_FULL_NAME` is `false`, show this many characters from the start of tag names longer than `SPACESHIP_GIT_OMG_TAG_MAX_LENGTH` characters |
+| `SPACESHIP_GIT_OMG_TAG_TAIL_LENGTH` | `$SPACESHIP_GIT_OMG_BRANCH_TAIL_LENGTH` | no change | If `SPACESHIP_GIT_OMG_TAG_FULL_NAME` is `false`, show this many characters from the end of tag names longer than `SPACESHIP_GIT_OMG_TAG_MAX_LENGTH` characters |
 
 #### Git index (`git_index`)
 
