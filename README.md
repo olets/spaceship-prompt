@@ -33,6 +33,7 @@ Currently it shows:
   * `⇕` — diverged changes;
   * `⤒` - at least one file is assumed unchanged;
   * `↧` - at least one file is skipped in the worktree.
+* [oh-my-git][oh-my-git-url] support
 * Easy Git prompt customization
 * Current Mercurial bookmark/branch and rich repo status:
   * `?` — untracked changes;
@@ -83,7 +84,8 @@ You can find more examples with different color schemes in [Screenshots](https:/
 For correct work you will first need:
 
 * [`zsh`](http://www.zsh.org/) (v5.0.6 or recent) must be installed.
-* [Powerline Font](https://github.com/powerline/fonts) must be installed and used in your terminal.
+* A [Powerline Font](https://github.com/powerline/fonts) must be installed and used in your terminal for many of the default indicators to display correctly.
+* A [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) must be installed and used in your terminal for the default oh-my-git indicators to display correctly.
 
 ## Installing
 
@@ -216,6 +218,10 @@ Have a trouble? Take a look at out [Troubleshooting](./docs/Troubleshooting.md) 
 
 Still struggling? Please, [file an issue](https://github.com/denysdovhan/spaceship-prompt/issues/new), describe your problem and we will gladly help you.
 
+## Acknowledgments
+
+oh-my-git is adapted from Arialdo Martini's [original][oh-my-git-url]
+
 ## Team
 
 | [![Denys Dovhan](https://github.com/denysdovhan.png?size=100)](http://denysdovhan.com) | [![Salmanul Farzy](https://github.com/salmanulfarzy.png?size=100)](https://github.com/salmanulfarzy) | [![Maxim Baz](https://github.com/maximbaz.png?size=100)](https://github.com/maximbaz) |
@@ -253,6 +259,7 @@ MIT © [Denys Dovhan](http://denysdovhan.com)
 
 <!-- References -->
 
+[oh-my-git-url]: https://github.com/arialdomartini/oh-my-git
 [oh-my-zsh]: http://ohmyz.sh/
 [prezto]: https://github.com/sorin-ionescu/prezto
 [antigen]: http://antigen.sharats.me/
