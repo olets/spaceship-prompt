@@ -142,6 +142,8 @@ Directory is always shown and truncated to the value of `SPACESHIP_DIR_TRUNC`. W
 
 Git section is consists with `git_branch` and `git_status` subsections. It is shown only in Git repositories.
 
+You can turn off the `git_branch` and `git_status` subsections on a per-repo basis by setting the appropriate Git config. To not show Git branch info for the current repo, run `git config spaceship.gitbranch=false`. To not show Git status info for the current repo, run `git config spaceship.gitstatus=false`.
+
 | Variable | Default | Meaning |
 | :------- | :-----: | ------- |
 | `SPACESHIP_GIT_SHOW` | `true` | Show Git section |

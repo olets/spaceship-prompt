@@ -20,7 +20,7 @@ Currently it shows:
 
 * Clever hostname and username displaying.
 * Prompt character turns red if the last command exits with non-zero code.
-* Current Git branch and rich repo status:
+* Current Git branch and rich repo status, with the option of opting out on a per-repo basis:
   * `?` — untracked changes;
   * `+` — uncommitted changes in the index;
   * `!` — unstaged changes;

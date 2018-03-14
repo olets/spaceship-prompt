@@ -31,7 +31,7 @@ SPACESHIP_GIT_STATUS_DIVERGED="${SPACESHIP_GIT_STATUS_DIVERGED="⇕"}"
 # See PR #147 at https://git.io/vQkkB
 # See git help status to know more about status formats
 spaceship_git_status() {
-  [[ $SPACESHIP_GIT_STATUS_SHOW == false ]] && return
+  [[ $(git config --get spaceship.gitstatus) == false || $SPACESHIP_GIT_STATUS_SHOW == false ]] && return
 
   spaceship::is_git || return
 
