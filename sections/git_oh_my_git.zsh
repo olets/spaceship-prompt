@@ -50,6 +50,7 @@ SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS="${SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS
 SPACESHIP_GIT_OMG_CACHED_DELETIONS="${SPACESHIP_GIT_OMG_CACHED_DELETIONS=" "}"
 SPACESHIP_GIT_OMG_ALL_STAGED="${SPACESHIP_GIT_OMG_ALL_STAGED=" "}"
 SPACESHIP_GIT_OMG_ACTION_PREFIX="${SPACESHIP_GIT_OMG_ACTION_PREFIX="  "}" # enhancement to OMG
+SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS="${SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS=false}" # enhancement to OMG
 
 # Where
 SPACESHIP_GIT_OMG_WHERE_SHOW="${SPACESHIP_GIT_OMG_WHERE_SHOW=true}" # enhancement to OMG
@@ -194,6 +195,16 @@ custom_build_prompt() {
   local will_rebase=${21}
   local has_stashes=${22}
   local action=${23}
+  if [[ $SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS == false ]]; then
+    local number_of_modified_files=${24}
+    local number_of_modified_cached_files=${25}
+    local number_of_added_files=${26}
+    local number_of_deleted_files=${27}
+    local number_of_deleted_cached_files=${28}
+    local number_of_ready_to_commit_files=${29}
+    local number_of_untracked_files=${30}
+    local number_of_stashes=${31}
+  fi
 
   local omg_status omg_where omg_color omg_color_alert
 
@@ -202,19 +213,19 @@ custom_build_prompt() {
     omg_color_alert="$SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR"
 
     # on filesystem
-    omg_status+=$(enrich_append $has_stashes "$SPACESHIP_GIT_OMG_STASHED" "$SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR_ALT")
+    omg_status+=$(enrich_append $has_stashes "$number_of_stashes$SPACESHIP_GIT_OMG_STASHED" "$SPACESHIP_GIT_OMG_STATUS_ALERT_COLOR_ALT")
 
-    omg_status+=$(enrich_append $has_untracked_files "$SPACESHIP_GIT_OMG_UNTRACKED" "$omg_color_alert")
-    omg_status+=$(enrich_append $has_modifications "$SPACESHIP_GIT_OMG_MODIFIED" "$omg_color_alert")
-    omg_status+=$(enrich_append $has_deletions "$SPACESHIP_GIT_OMG_DELETED" "$omg_color_alert")
+    omg_status+=$(enrich_append $has_untracked_files "$number_of_untracked_files$SPACESHIP_GIT_OMG_UNTRACKED" "$omg_color_alert")
+    omg_status+=$(enrich_append $has_modifications "$number_of_modified_files$SPACESHIP_GIT_OMG_MODIFIED" "$omg_color_alert")
+    omg_status+=$(enrich_append $has_deletions "$number_of_deleted_files$SPACESHIP_GIT_OMG_DELETED" "$omg_color_alert")
 
     # ready
-    omg_status+=$(enrich_append $has_adds "$SPACESHIP_GIT_OMG_ADDED")
-    omg_status+=$(enrich_append $has_modifications_cached "$SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS")
-    omg_status+=$(enrich_append $has_deletions_cached "$SPACESHIP_GIT_OMG_CACHED_DELETIONS")
+    omg_status+=$(enrich_append $has_adds "$number_of_added_files$SPACESHIP_GIT_OMG_ADDED")
+    omg_status+=$(enrich_append $has_modifications_cached "$number_of_modified_cached_files$SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS")
+    omg_status+=$(enrich_append $has_deletions_cached "$number_of_deleted_cached_files$SPACESHIP_GIT_OMG_CACHED_DELETIONS")
 
     # next operation
-    omg_status+=$(enrich_append $ready_to_commit "$SPACESHIP_GIT_OMG_ALL_STAGED" "$omg_color_alert")
+    omg_status+=$(enrich_append $ready_to_commit "$number_of_ready_to_commit_files$SPACESHIP_GIT_OMG_ALL_STAGED" "$omg_color_alert")
 
     # current action
     omg_status+=$(enrich_append $action "${SPACESHIP_GIT_OMG_ACTION_PREFIX} $(get_current_action)" "$omg_color_alert" true)
