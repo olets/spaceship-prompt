@@ -195,15 +195,16 @@ custom_build_prompt() {
   local will_rebase=${21}
   local has_stashes=${22}
   local action=${23}
+  local number_of_modified_files number_of_modified_cached_files number_of_added_files number_of_deleted_files number_of_deleted_cached_files number_of_ready_to_commit_files number_of_untracked_files number_of_stashes
   if [[ $SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS == false ]]; then
-    local number_of_modified_files=${24}
-    local number_of_modified_cached_files=${25}
-    local number_of_added_files=${26}
-    local number_of_deleted_files=${27}
-    local number_of_deleted_cached_files=${28}
-    local number_of_ready_to_commit_files=${29}
-    local number_of_untracked_files=${30}
-    local number_of_stashes=${31}
+    [[ ${24} != 0 ]] && number_of_modified_files=${24}
+    [[ ${25} != 0 ]] && number_of_modified_cached_files=${25}
+    [[ ${26} != 0 ]] && number_of_added_files=${26}
+    [[ ${27} != 0 ]] && number_of_deleted_files=${27}
+    [[ ${28} != 0 ]] && number_of_deleted_cached_files=${28}
+    [[ ${29} != 0 ]] && number_of_ready_to_commit_files=${29}
+    [[ ${30} != 0 ]] && number_of_untracked_files=${30}
+    [[ ${31} != 0 ]] && number_of_stashes=${31}
   fi
 
   local omg_status omg_where omg_color omg_color_alert

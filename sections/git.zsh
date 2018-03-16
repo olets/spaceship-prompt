@@ -31,9 +31,9 @@ spaceship_git() {
 
   local git_prompt
 
-  for el in ${(Oa)SPACESHIP_GIT_ORDER}; do
+  for el in ${SPACESHIP_GIT_ORDER}; do
     source "$SPACESHIP_ROOT/sections/git_${el}.zsh" # load dependency
-    git_prompt="$(spaceship_git_${el})$git_prompt"
+    git_prompt+="$(spaceship_git_${el})"
   done
 
   [[ -z $git_prompt ]] && return
