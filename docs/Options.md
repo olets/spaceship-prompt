@@ -165,7 +165,7 @@ SPACESHIP_GIT_ORDER=(
 )
 ```
 
-The other Git subsection shipped with Spaceship is `status_actionable`, a Git status where icons show changes that are not in the index yet. Described in [PR #359](https://git.io/vACxq)
+The other Git subsection shipped with Spaceship is `status_actionable`, a Git status where icons show changes that are not in the index yet. See below for details.
 
 #### Git branch (`git_branch`)
 
@@ -195,7 +195,29 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_STATUS_UNMERGED` | `=` | Indicator for unmerged changes |
 | `SPACESHIP_GIT_STATUS_AHEAD` | `⇡` | Indicator for unpushed changes (ahead of remote branch) |
 | `SPACESHIP_GIT_STATUS_BEHIND` | `⇣` | Indicator for unpulled changes (behind of remote branch) |
-| `SPACESHIP_GIT_STATUS_DIVERGED` | `⇕` | Indicator for diverged chages (diverged with remote branch) |
+| `SPACESHIP_GIT_STATUS_DIVERGED` | `⇕` | Indicator for diverged changes (diverged with remote branch) |
+
+#### Git status, actionable (`git_status_actionable`)
+
+Unlike `git_status`, `git_status_actionable` shows untracked, modified, and deleted indicators for unstaged files only. All staged changes are indicated with the same "staged" indicator. `git_status_actionable` does not support an indicator for renamed files.
+
+Demonstrated in [PR #359](https://git.io/vACxq)
+
+| Variable | Default | Meaning |
+| :------- | :-----: | ------- |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_SHOW` | `$SPACESHIP_GIT_STATUS_SHOW` | Show Git status subsection |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_PREFIX` | `$SPACESHIP_GIT_STATUS_PREFIX` | Prefix before Git status subsection |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_SUFFIX` | `$SPACESHIP_GIT_STATUS_SUFFIX` | Suffix after Git status subsection |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_COLOR` | `$SPACESHIP_GIT_STATUS_COLOR` | Color of Git status subsection |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_UNTRACKED` | `$SPACESHIP_GIT_STATUS_UNTRACKED` | Indicator for untracked changes |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_STAGED` | `$SPACESHIP_GIT_STATUS_ADDED` | Indicator for staged changes |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_MODIFIED` | `$SPACESHIP_GIT_STATUS_MODIFIED` | Indicator for modified files in the working tree |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_DELETED` | `$SPACESHIP_GIT_STATUS_DELETED` | Indicator for deleted files |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_STASHED` | `$SPACESHIP_GIT_STATUS_STASHED` | Indicator for stashed changes |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_UNMERGED` | `$SPACESHIP_GIT_STATUS_UNMERGED` | Indicator for unmerged changes |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_AHEAD` | `$SPACESHIP_GIT_STATUS_AHEAD` | Indicator for unpushed changes (ahead of remote branch) |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_BEHIND` | `$SPACESHIP_GIT_STATUS_BEHIND` | Indicator for unpulled changes (behind of remote branch) |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_DIVERGED` | `$SPACESHIP_GIT_STATUS_DIVERGED` | Indicator for diverged changes (diverged with remote branch) |
 
 ### Mercurial (`hg`)
 
