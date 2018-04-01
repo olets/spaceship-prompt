@@ -12,13 +12,20 @@
 SPACESHIP_GIT_SHOW="${SPACESHIP_GIT_SHOW=true}"
 SPACESHIP_GIT_PREFIX="${SPACESHIP_GIT_PREFIX="on "}"
 SPACESHIP_GIT_SUFFIX="${SPACESHIP_GIT_SUFFIX="$SPACESHIP_PROMPT_DEFAULT_SUFFIX"}"
-SPACESHIP_GIT_SYMBOL="${SPACESHIP_GIT_SYMBOL=" "}"
 if [ -z "$SPACESHIP_GIT_ORDER" ]; then
   SPACESHIP_GIT_ORDER=(
     branch
     status
   )
 fi
+
+# ------------------------------------------------------------------------------
+# Dependencies
+# ------------------------------------------------------------------------------
+
+for subsection in "$SPACESHIP_ROOT"/sections/git_*.zsh; do
+  source $subsection
+done
 
 # ------------------------------------------------------------------------------
 # Section
@@ -29,12 +36,8 @@ spaceship_git() {
 
   spaceship::is_git || return
 
-  local git_prompt
-
-  for el in ${(Oa)SPACESHIP_GIT_ORDER}; do
-    source "$SPACESHIP_ROOT/sections/git_${el}.zsh" # load dependency
-    git_prompt="$(spaceship_git_${el})$git_prompt"
-  done
+  # prefix${^array} prefixes each element in $array with prefix
+  local git_prompt=$(spaceship::compose_prompt git_${^SPACESHIP_GIT_ORDER})
 
   [[ -z $git_prompt ]] && return
 

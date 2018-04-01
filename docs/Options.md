@@ -147,14 +147,10 @@ Git section is shown only in Git repositories.
 | `SPACESHIP_GIT_SHOW` | `true` | Show Git section |
 | `SPACESHIP_GIT_PREFIX` | `on·` | Prefix before Git section |
 | `SPACESHIP_GIT_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after Git section |
-| `SPACESHIP_GIT_SYMBOL` | ![·](https://user-images.githubusercontent.com/3459374/34947621-4f324a92-fa13-11e7-9b99-cdba2cdda6b9.png) | Character to be shown before Git section (requires [powerline patched font](https://github.com/powerline/fonts) |
-
 
 #### Git subsections
 
-The Git section consists of several subsections. You can specify the order of the subsections using `SPACESHIP_PROMPT_ORDER` option. Use Zsh array syntax to define your own prompt order.
-
-The order also defines which sections that Spaceship loads. If you're struggling with slow prompt, you can just omit the sections that you don't use, and they won't be loaded.
+The Git section consists of several subsections. You can specify the order of the Git subsections using `SPACESHIP_PROMPT_ORDER` option. Use Zsh array syntax to define your own prompt order.
 
 The default order is:
 
@@ -179,7 +175,7 @@ The other Git subsections shipped with Spaceship are
 | Variable | Default | Meaning |
 | :------- | :-----: | ------- |
 | `SPACESHIP_GIT_BRANCH_SHOW` | `true` | Show Git branch subsection |
-| `SPACESHIP_GIT_BRANCH_PREFIX` | `$SPACESHIP_GIT_SYMBOL` | Prefix before Git branch subsection |
+| `SPACESHIP_GIT_BRANCH_PREFIX` | ![·](https://user-images.githubusercontent.com/3459374/34947621-4f324a92-fa13-11e7-9b99-cdba2cdda6b9.png) | Prefix before Git branch subsection (default requires [powerline patched font](https://github.com/powerline/fonts)
 | `SPACESHIP_GIT_BRANCH_SUFFIX` | ` ` | Suffix after Git branch subsection |
 | `SPACESHIP_GIT_BRANCH_COLOR` | `magenta` | Color of Git branch subsection |
 
