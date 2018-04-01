@@ -166,7 +166,7 @@ The other Git subsections shipped with Spaceship are
 | Subsection | Meaning |
 | :--------- | ------- |
 | `status_oh_my_zsh` | Ported from [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh), this is the Git status Spaceship used prior to v3.0. |
-| `status_actionable` | A Git status where icons show changes that are not in the index yet. Described in [PR #359](https://git.io/vACxq) |
+| `status_actionable` | A Git status where icons show changes that are not in the index yet. See below for details. |
 | `oh_my_git` | Ported from [oh-my-git](https://github.com/arialdomartini/oh-my-git), a complete Git prompt including status and branch info. |
 | `index` | Indicators related to `git-update-index`. |
 
@@ -198,7 +198,7 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_STATUS_UNMERGED` | `=` | Indicator for unmerged changes |
 | `SPACESHIP_GIT_STATUS_AHEAD` | `⇡` | Indicator for unpushed changes (ahead of remote branch) |
 | `SPACESHIP_GIT_STATUS_BEHIND` | `⇣` | Indicator for unpulled changes (behind of remote branch) |
-| `SPACESHIP_GIT_STATUS_DIVERGED` | `⇕` | Indicator for diverged chages (diverged with remote branch) |
+| `SPACESHIP_GIT_STATUS_DIVERGED` | `⇕` | Indicator for diverged changes (diverged with remote branch) |
 
 #### Git status, oh-my-zsh flavor (`git_status_oh_my_zsh`)
 
@@ -220,6 +220,28 @@ Ported from [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)'s [`git_promp
 | `SPACESHIP_GIT_STATUS_OMZ_AHEAD` | `$SPACESHIP_GIT_STATUS_AHEAD` | Indicator for unpushed changes (ahead of remote branch) |
 | `SPACESHIP_GIT_STATUS_OMZ_BEHIND` | `$SPACESHIP_GIT_STATUS_BEHIND` | Indicator for unpulled changes (behind of remote branch) |
 | `SPACESHIP_GIT_STATUS_OMZ_DIVERGED` | `$SPACESHIP_GIT_STATUS_DIVERGED` | Indicator for diverged chages (diverged with remote branch) |
+
+#### Git status, actionable (`git_status_actionable`)
+
+Unlike `git_status`, `git_status_actionable` shows untracked, modified, and deleted indicators for unstaged files only. All staged changes are indicated with the same "staged" indicator. `git_status_actionable` does not support an indicator for renamed files.
+
+Demonstrated in [PR #359](https://git.io/vACxq)
+
+| Variable | Default | Meaning |
+| :------- | :-----: | ------- |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_SHOW` | `$SPACESHIP_GIT_STATUS_SHOW` | Show Git status subsection |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_PREFIX` | `$SPACESHIP_GIT_STATUS_PREFIX` | Prefix before Git status subsection |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_SUFFIX` | `$SPACESHIP_GIT_STATUS_SUFFIX` | Suffix after Git status subsection |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_COLOR` | `$SPACESHIP_GIT_STATUS_COLOR` | Color of Git status subsection |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_UNTRACKED` | `$SPACESHIP_GIT_STATUS_UNTRACKED` | Indicator for untracked changes |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_STAGED` | `$SPACESHIP_GIT_STATUS_ADDED` | Indicator for staged changes |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_MODIFIED` | `$SPACESHIP_GIT_STATUS_MODIFIED` | Indicator for modified files in the working tree |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_DELETED` | `$SPACESHIP_GIT_STATUS_DELETED` | Indicator for deleted files |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_STASHED` | `$SPACESHIP_GIT_STATUS_STASHED` | Indicator for stashed changes |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_UNMERGED` | `$SPACESHIP_GIT_STATUS_UNMERGED` | Indicator for unmerged changes |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_AHEAD` | `$SPACESHIP_GIT_STATUS_AHEAD` | Indicator for unpushed changes (ahead of remote branch) |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_BEHIND` | `$SPACESHIP_GIT_STATUS_BEHIND` | Indicator for unpulled changes (behind of remote branch) |
+| `SPACESHIP_GIT_STATUS_ACTIONABLE_DIVERGED` | `$SPACESHIP_GIT_STATUS_DIVERGED` | Indicator for diverged changes (diverged with remote branch) |
 
 #### oh-my-git (`oh_my_git`)
 
