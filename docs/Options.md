@@ -231,6 +231,7 @@ Git status indicators is shown only when you have dirty repository.
 | `SPACESHIP_GIT_OMG_ALL_STAGED` | `·` | no change | Indicator that all changes have been staged (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
 | `SPACESHIP_GIT_OMG_ACTION_PREFIX` | `··` | no change | Prefix before the current Git action (requires [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) |
 | `SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS` | `true` | no change | If false, each file status with matching files will be prefixed by the number of matching files.
+| `SPACESHIP_GIT_OMG_SHOW_STAGED_TOTAL` | `true` | no change | If false, the total number of staged files will not be shown.
 
 ##### Where
 

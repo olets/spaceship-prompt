@@ -51,6 +51,7 @@ SPACESHIP_GIT_OMG_CACHED_DELETIONS="${SPACESHIP_GIT_OMG_CACHED_DELETIONS=" "}
 SPACESHIP_GIT_OMG_ALL_STAGED="${SPACESHIP_GIT_OMG_ALL_STAGED=" "}"
 SPACESHIP_GIT_OMG_ACTION_PREFIX="${SPACESHIP_GIT_OMG_ACTION_PREFIX="  "}" # enhancement to OMG
 SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS="${SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS=true}" # enhancement to OMG
+SPACESHIP_GIT_OMG_SHOW_STAGED_TOTAL="${SPACESHIP_GIT_OMG_SHOW_STAGED_TOTAL=true}" # enhancement to OMG
 
 # Where
 SPACESHIP_GIT_OMG_WHERE_SHOW="${SPACESHIP_GIT_OMG_WHERE_SHOW=true}" # enhancement to OMG
@@ -225,7 +226,9 @@ custom_build_prompt() {
     omg_status+=$(enrich_append $has_deletions_cached "$number_of_deleted_cached_files$SPACESHIP_GIT_OMG_CACHED_DELETIONS")
 
     # next operation
-    omg_status+=$(enrich_append $ready_to_commit "$number_of_ready_to_commit_files$SPACESHIP_GIT_OMG_ALL_STAGED" "$omg_color_alert")
+    if [[ $SPACESHIP_GIT_OMG_SHOW_STAGED_TOTAL == true ]]; then
+      omg_status+=$(enrich_append $ready_to_commit "$number_of_ready_to_commit_files$SPACESHIP_GIT_OMG_ALL_STAGED" "$omg_color_alert")
+    fi
 
     # current action
     omg_status+=$(enrich_append $action "${SPACESHIP_GIT_OMG_ACTION_PREFIX} $(get_current_action)" "$omg_color_alert" true)
