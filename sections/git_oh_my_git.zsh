@@ -50,7 +50,7 @@ SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS="${SPACESHIP_GIT_OMG_CACHED_MODIFICATIONS
 SPACESHIP_GIT_OMG_CACHED_DELETIONS="${SPACESHIP_GIT_OMG_CACHED_DELETIONS=" "}"
 SPACESHIP_GIT_OMG_ALL_STAGED="${SPACESHIP_GIT_OMG_ALL_STAGED=" "}"
 SPACESHIP_GIT_OMG_ACTION_PREFIX="${SPACESHIP_GIT_OMG_ACTION_PREFIX="  "}" # enhancement to OMG
-SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS="${SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS=false}" # enhancement to OMG
+SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS="${SPACESHIP_GIT_OMG_HIDE_FILE_COUNTS=true}" # enhancement to OMG
 
 # Where
 SPACESHIP_GIT_OMG_WHERE_SHOW="${SPACESHIP_GIT_OMG_WHERE_SHOW=true}" # enhancement to OMG
@@ -201,8 +201,8 @@ custom_build_prompt() {
     local number_of_added_files=${26:#0}
     local number_of_deleted_files=${27:#0}
     local number_of_deleted_cached_files=${28:#0}
-    local number_of_ready_to_commit_files=${29:#0}
-    local number_of_untracked_files=${30:#0}
+    local number_of_untracked_files=${29:#0}
+    local number_of_ready_to_commit_files=${30:#0}
     local number_of_stashes=${31:#0}
   fi
 
