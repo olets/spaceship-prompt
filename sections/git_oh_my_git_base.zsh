@@ -76,15 +76,34 @@ build_prompt() {
       local git_status="$(git status --porcelain 2> /dev/null)"
       local action="$(get_current_action)"
 
-      if [[ $git_status =~ ($'\n'|^).M ]]; then local has_modifications=true; fi
-      if [[ $git_status =~ ($'\n'|^)M ]]; then local has_modifications_cached=true; fi
-      if [[ $git_status =~ ($'\n'|^)A ]]; then local has_adds=true; fi
-      if [[ $git_status =~ ($'\n'|^).D ]]; then local has_deletions=true; fi
-      if [[ $git_status =~ ($'\n'|^)D ]]; then local has_deletions_cached=true; fi
-      if [[ $git_status =~ ($'\n'|^)[MAD] && ! $git_status =~ ($'\n'|^).[MAD\?] ]]; then local ready_to_commit=true; fi
+      local number_of_modified_files=$(\grep -c "$\n.M" <<< "${git_status}")
+      local number_of_modified_files=$(( ${number_of_modified_files} + $(\grep -c "^.M" <<< "${git_status}") ))
+      if [[ $number_of_modified_files -gt 0 ]]; then local has_modifications=true; fi
+
+      local number_of_modified_cached_files=$(\grep -c "$\nM" <<< "${git_status}")
+      local number_of_modified_cached_files=$(( ${number_of_modified_cached_files} + $(\grep -c "^M" <<< "${git_status}") ))
+      if [[ $number_of_modified_cached_files -gt 0 ]]; then local has_modifications_cached=true; fi
+
+      local number_of_added_files=$(\grep -c "$\nA" <<< "${git_status}")
+      local number_of_added_files=$(( ${number_of_added_files} + $(\grep -c "^A" <<< "${git_status}") ))
+      if [[ $number_of_added_files -gt 0 ]]; then local has_adds=true; fi
+
+      local number_of_deleted_files=$(\grep -c "$\n.D" <<< "${git_status}")
+      local number_of_deleted_files=$(( ${number_of_deleted_files} + $(\grep -c "^.D" <<< "${git_status}") ))
+      if [[ $number_of_deleted_files -gt 0 ]]; then local has_deletions=true; fi
+
+      local number_of_deleted_cached_files=$(\grep -c "$\nD" <<< "${git_status}")
+      local number_of_deleted_cached_files=$(( ${number_of_deleted_cached_files} + $(\grep -c "^D" <<< "${git_status}") ))
+      if [[ $number_of_deleted_cached_files -gt 0 ]]; then local has_deletions_cached=true; fi
 
       local number_of_untracked_files=$(\grep -c "^??" <<< "${git_status}")
       if [[ $number_of_untracked_files -gt 0 ]]; then local has_untracked_files=true; fi
+
+      # local number_of_ready_to_commit_files=$(\grep -c "$\n.[MAD\?]" <<< "${git_status}")
+      # local number_of_ready_to_commit_files=$(( ${number_of_ready_to_commit_files} + $(\grep -c "^.[MAD\?]" <<< "${git_status}") ))
+      local number_of_ready_to_commit_files=$(( $number_of_modified_cached_files + $number_of_deleted_cached_files + $number_of_added_files ))
+
+      if [[ $number_of_ready_to_commit_files -gt 0 && $(( $number_of_modified_files + $number_of_deleted_files + $number_of_untracked_files )) -eq 0 ]]; then local ready_to_commit=true; fi
 
       local tag_at_current_commit=$(git describe --exact-match --tags $current_commit_hash 2> /dev/null)
       if [[ -n $tag_at_current_commit ]]; then local is_on_a_tag=true; fi
@@ -100,12 +119,12 @@ build_prompt() {
 
       local will_rebase=$(git config --get branch.${current_branch}.rebase 2> /dev/null)
 
-      local number_of_stashes="$(git stash list -n1 2> /dev/null | wc -l)"
+      local number_of_stashes="${$(git stash list 2> /dev/null | wc -l)// /}"
       if [[ $number_of_stashes -gt 0 ]]; then local has_stashes=true; fi
     fi
   fi
 
-  custom_build_prompt ${enabled:-true} ${current_commit_hash:-""} ${is_a_git_repo:-false} ${current_branch:-""} ${detached:-false} ${just_init:-false} ${has_modifications:-false} ${has_modifications_cached:-false} ${has_adds:-false} ${has_deletions:-false} ${has_deletions_cached:-false} ${has_untracked_files:-false} ${ready_to_commit:-false} ${tag_at_current_commit:-""} ${is_on_a_tag:-false} ${has_upstream:-false} ${commits_ahead:-false} ${commits_behind:-false} ${has_diverged:-false} ${should_push:-false} ${will_rebase:-false} ${has_stashes:-false} ${action:-false}
+  custom_build_prompt ${enabled:-true} ${current_commit_hash:-""} ${is_a_git_repo:-false} ${current_branch:-""} ${detached:-false} ${just_init:-false} ${has_modifications:-false} ${has_modifications_cached:-false} ${has_adds:-false} ${has_deletions:-false} ${has_deletions_cached:-false} ${has_untracked_files:-false} ${ready_to_commit:-false} ${tag_at_current_commit:-""} ${is_on_a_tag:-false} ${has_upstream:-false} ${commits_ahead:-false} ${commits_behind:-false} ${has_diverged:-false} ${should_push:-false} ${will_rebase:-false} ${has_stashes:-false} ${action:-false} ${number_of_modified_files} ${number_of_modified_cached_files} ${number_of_added_files} ${number_of_deleted_files} ${number_of_deleted_cached_files} ${number_of_untracked_files} ${number_of_ready_to_commit_files} ${number_of_stashes}
 }
 
 function_exists() {
