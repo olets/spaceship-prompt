@@ -112,6 +112,16 @@ By default, a username is shown only when it's not the same as `$LOGNAME`, when 
 | `true`                | If needed      | Always          |
 | `needed`              | If needed      | If needed       |
 
+### Screen (`screen`)
+
+The Screen section is used to indicate that you are in a [Screen](https://www.gnu.org/software/screen/manual/screen.html) session.
+
+| `SPACESHIP_SCREEN_SHOW` | `true` | Show the Screen section |
+| `SPACESHIP_SCREEN_PREFIX` | `` | Prefix before the Screen section |
+| `SPACESHIP_SCREEN_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after the Screen section |
+| `SPACESHIP_SCREEN_SYMBOL` | `[screen]` | Indicator displayed if user is in a Screen session |
+| `SPACESHIP_SCREEN_COLOR` | `cyan` | Color of the Screen section |
+
 ### Hostname (`host`)
 
 Hostname is shown only when you're connected via SSH unless you change this behavior.
