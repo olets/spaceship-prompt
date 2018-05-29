@@ -49,7 +49,7 @@ Currently it shows:
 * Current Go version (`🐹`).
 * Current PHP version (`🐘`).
 * Current Rust version (`𝗥`).
-* Current version of Haskell Tool Stack (`λ`).
+* Current version of Haskell GHC Compiler, defined in stack.yaml file (`λ`).
 * Current Julia version (`ஃ`).
 * Current Docker version and connected machine (`🐳`).
 * Current Amazon Web Services (AWS) profile (`☁️`) ([Using named profiles](http://docs.aws.amazon.com/cli/latest/userguide/cli-multiple-profiles.html)).
@@ -69,7 +69,7 @@ Currently it shows:
 * Optional time stamps 12/24hr in format ([how to enable](./docs/Options.md#time-time)).
 * Execution time of the last command if it exceeds the set threshold.
 
-Want more features? Please, [open an issue](https://github.com/denysdovhan/spaceship-prompt/issues/new) or send pull request.
+Want more features? Please, [open an issue](https://github.com/denysdovhan/spaceship-prompt/issues/new/choose) or send pull request.
 
 ## Preview
 
@@ -216,7 +216,7 @@ Also, take a look at popular option presets or share your own configuration on [
 
 Have a trouble? Take a look at out [Troubleshooting](./docs/Troubleshooting.md) page.
 
-Still struggling? Please, [file an issue](https://github.com/denysdovhan/spaceship-prompt/issues/new), describe your problem and we will gladly help you.
+Still struggling? Please, [file an issue](https://github.com/denysdovhan/spaceship-prompt/issues/new/choose), describe your problem and we will gladly help you.
 
 ## Acknowledgments
 

@@ -112,6 +112,16 @@ By default, a username is shown only when it's not the same as `$LOGNAME`, when 
 | `true`                | If needed      | Always          |
 | `needed`              | If needed      | If needed       |
 
+### Screen (`screen`)
+
+The Screen section is used to indicate that you are in a [Screen](https://www.gnu.org/software/screen/manual/screen.html) session.
+
+| `SPACESHIP_SCREEN_SHOW` | `true` | Show the Screen section |
+| `SPACESHIP_SCREEN_PREFIX` | `` | Prefix before the Screen section |
+| `SPACESHIP_SCREEN_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after the Screen section |
+| `SPACESHIP_SCREEN_SYMBOL` | `[screen]` | Indicator displayed if user is in a Screen session |
+| `SPACESHIP_SCREEN_COLOR` | `cyan` | Color of the Screen section |
+
 ### Hostname (`host`)
 
 Hostname is shown only when you're connected via SSH unless you change this behavior.
@@ -360,7 +370,7 @@ Mercurial status indicators is shown only when you have dirty repository.
 
 > Works only for [npm](https://www.npmjs.com/) at the moment. Please, help us improve this section!
 
-Package version is shown when repository is a package (e.g. contains a `package.json` file).
+Package version is shown when repository is a package (e.g. contains a `package.json` file). If no version information is found in `package.json`, the `⚠` symbol will be displayed.
 
 > **Note:** This is the version of the package you are working on, not the version of package manager itself.
 
@@ -529,6 +539,7 @@ Shows selected Amazon Web Services profile using '[named profiles](http://docs.a
 | `SPACESHIP_VENV_SHOW` | `true` | Show current Python virtualenv or not |
 | `SPACESHIP_VENV_PREFIX` | `$SPACESHIP_PROMPT_DEFAULT_PREFIX` | Prefix before the virtualenv section |
 | `SPACESHIP_VENV_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after the virtualenv section |
+| `SPACESHIP_VENV_SYMBOL` | `·` | Character to be shown before virtualenv |
 | `SPACESHIP_VENV_GENERIC_NAMES` | `(virtualenv venv .venv)` | If the virtualenv folder is in this *array*, than use its parent directory as its name instead |
 | `SPACESHIP_VENV_COLOR` | `blue` | Color of virtualenv environment section |
 

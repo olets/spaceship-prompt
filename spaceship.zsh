@@ -7,7 +7,7 @@
 
 # Current version of Spaceship
 # Useful for issue reporting
-export SPACESHIP_VERSION='3.2.0'
+export SPACESHIP_VERSION='3.4.1'
 
 # Common-used variable for new line separator
 NEWLINE='
@@ -43,6 +43,7 @@ if [ -z "$SPACESHIP_PROMPT_ORDER" ]; then
     time          # Time stampts section
     user          # Username section
     dir           # Current directory section
+    screen        # Screen window manager section
     host          # Hostname section
     git           # Git section (git_branch + git_status)
     hg            # Mercurial section (hg_branch  + hg_status)
