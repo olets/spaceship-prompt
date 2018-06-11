@@ -139,6 +139,8 @@ spaceship::deprecated SPACESHIP_BATTERY_FULL_SYMBOL "Use %BSPACESHIP_BATTERY_SYM
 # PROMPT
 # Primary (left) prompt
 spaceship_prompt() {
+  [[ -e "$PWD"/.spaceshiprc ]] && source "$PWD"/.spaceshiprc
+
   # Retrieve exit code of last command to use in exit_code
   # Must be captured before any other command in prompt is executed
   # Must be the very first line in all entry prompt functions, or the value
