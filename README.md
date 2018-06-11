@@ -7,6 +7,7 @@
 # 🚀⭐ Spaceship ZSH
 
 [![NPM version][npm-image]][npm-url]
+[![Build status][ci-image]][ci-url]
 [![Zsh][zsh-image]][zsh-url]
 [![Donate with card][donate-card-image]][donate-readme]
 [![Donate with Bitcoin][donate-btc-image]][donate-readme]
@@ -83,7 +84,7 @@ You can find more examples with different color schemes in [Screenshots](https:/
 
 For correct work you will first need:
 
-* [`zsh`](http://www.zsh.org/) (v5.0.6 or recent) must be installed.
+* [`zsh`](http://www.zsh.org/) (v5.2 or recent) must be installed.
 * A [Powerline Font](https://github.com/powerline/fonts) must be installed and used in your terminal for many of the default indicators to display correctly.
 * A [Fontawesome-patched font](https://github.com/arialdomartini/oh-my-git#the-font) must be installed and used in your terminal for the default oh-my-git indicators to display correctly.
 
@@ -208,7 +209,7 @@ Spaceship works well out of the box, but you can customize almost everything if 
 * [**Options**](./docs/Options.md) — Tweak section's behavior with tons of options.
 * [**API**](./docs/API.md) — Define a custom section that will do exactly what you want.
 
-You have ability to customize or disable specific elements of Spaceship. All options must be overridden in your `.zshrc` file **after** the theme.
+You have ability to customize or disable specific elements of Spaceship. All options must be overridden in your `.zshrc` file **after** the theme. You can also set per-project Spaceship options in a `.spaceshiprc` file.
 
 Also, take a look at popular option presets or share your own configuration on [Presets](https://github.com/denysdovhan/spaceship-prompt/wiki/Presets) wiki page.
 
@@ -248,8 +249,11 @@ MIT © [Denys Dovhan](http://denysdovhan.com)
 [npm-url]: https://npmjs.org/package/spaceship-prompt
 [npm-image]: https://img.shields.io/npm/v/spaceship-prompt.svg?style=flat-square
 
+[ci-url]: https://travis-ci.org/denysdovhan/spaceship-prompt
+[ci-image]: https://img.shields.io/travis/denysdovhan/spaceship-prompt.svg?style=flat-square
+
 [zsh-url]: http://zsh.org/
-[zsh-image]: https://img.shields.io/badge/zsh-%3E%3Dv5.0.6-777777.svg?style=flat-square
+[zsh-image]: https://img.shields.io/badge/zsh-%3E%3Dv5.2-777777.svg?style=flat-square
 
 [donate-readme]: https://github.com/denysdovhan/spaceship-prompt#donate
 [donate-card-url]: https://www.liqpay.com/en/checkout/380951100392
