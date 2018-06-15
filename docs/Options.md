@@ -23,6 +23,7 @@ SPACESHIP_PROMPT_ORDER=(
   git           # Git section (git_branch + git_status)
   hg            # Mercurial section (hg_branch  + hg_status)
   package       # Package version
+  postgresql    # PostgreSQL version
   node          # Node.js section
   ruby          # Ruby section
   elixir        # Elixir section
@@ -231,6 +232,16 @@ Package version is shown when repository is a package (e.g. contains a `package.
 | `SPACESHIP_PACKAGE_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after package version section |
 | `SPACESHIP_PACKAGE_SYMBOL` | `📦·` | Character to be shown before package version |
 | `SPACESHIP_PACKAGE_COLOR` | `red` | Color of package version section |
+
+### PostgreSQL (`postgresql`)
+
+| Variable | Default | Meaning |
+| :------- | :-----: | ------- |
+| `SPACESHIP_POSTGRESQL_SHOW` | true | Show PostgreSQL section |
+| `SPACESHIP_POSTGRESQL_PREFIX` | `$SPACESHIP_PROMPT_DEFAULT_PREFIX` | Prefix before the PostgreSQL section |
+| `SPACESHIP_POSTGRESQL_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after the PostgreSQL section |
+| `SPACESHIP_POSTGRESQL_SYMBOL` | `🐢·` | Character to be shown before PostgreSQL version |
+| `SPACESHIP_POSTGRESQL_COLOR` | `blue` | Color of PostgreSQL section |
 
 ### Node.js (`node`)
 
