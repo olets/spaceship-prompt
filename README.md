@@ -61,6 +61,11 @@ Currently it shows:
   * `⇡` - charging;
   * `⇣` - discharging;
   * `•` - fully charged.
+    harvest       # Harvest status
+* Current Harvest status:
+  * `⏳` - the timer is running;
+  * `🛑` - the timer is stopped;
+  * `⚠` - error in Harvest connection
 * Current Vi-mode mode ([with handy aliases for temporarily enabling](./docs/Options.md#vi-mode-vi_mode)).
 * Optional exit-code of last command ([how to enable](./docs/Options.md#exit-code-exit_code)).
 * Optional time stamps 12/24hr in format ([how to enable](./docs/Options.md#time-time)).

@@ -488,6 +488,34 @@ By default, Battery section is shown only if battery level is below `SPACESHIP_B
 | `true`                   | Shown           | Hidden          | Hidden        |
 | `charged`                | Shown           | Hidden          | Shown         |
 
+### Harvest (`harvest`)
+
+This section shows the status of the Harvest timer (requires [Harvest Command Line](https://github.com/zenhob/hcl))
+
+By default, this section is shown only if the Harvest timer is running.
+
+This section is not included in the default `SPACESHIP_PROMPT_ORDER` due to the negative effect the Harvest API call can have on performance.
+
+| Variable | Default | Meaning |
+| :------- | :-----: | ------- |
+| `SPACESHIP_HARVEST_SHOW_RUNNING` | `true` | Show if timer is running |
+| `SPACESHIP_HARVEST_SHOW_STOPPED` | `false` | Show if timer is stopped |
+| `SPACESHIP_HARVEST_PREFIX` | `` | Prefix before Harvest section |
+| `SPACESHIP_HARVEST_SUFFIX` | `$SPACESHIP_PROMPT_DEFAULT_SUFFIX` | Suffix after Harvest section |
+| `SPACESHIP_HARVEST_RUNNING_SYMBOL` | `⏳` | Character to be shown if timer is running |
+| `SPACESHIP_HARVEST_STOPPED_SYMBOL` | `🛑 ` | Character to be shown if timer is stopped |
+| `SPACESHIP_HARVEST_DOWN_SYMBOL` | `⚠️ ` | Character to be shown if there is an error in the Harvest connection |
+| `SPACESHIP_HARVEST_COLOR` | `208` | Color of the Harvest section |
+
+`SPACESHIP_BATTERY_SHOW` defines when to show battery section. Here are possible values:
+
+| `SPACESHIP_HARVEST_SHOW` | Harvest stopped | Harvest running | Harvest error |
+| :----------------------: | :-------------- | :-------------- | :------------ |
+| `false`                  | Hidden          | Hidden          | Hidden        |
+| `always`                 | Shown           | Shown           | Shown         |
+| `true`                   | Hidden          | Shown           | Hidden        |
+| `stopped`                | Shown           | Hidden          | Shown         |
+
 ### Vi-mode (`vi_mode`)
 
 This section shows mode indicator only when Vi-mode is enabled.
