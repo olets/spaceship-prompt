@@ -112,11 +112,11 @@ source "$SPACESHIP_ROOT/lib/section.zsh"
 # ------------------------------------------------------------------------------
 
 for section in $(spaceship::union $SPACESHIP_PROMPT_ORDER $SPACESHIP_RPROMPT_ORDER); do
-  if [[ -f "$SPACESHIP_ROOT/sections/$section.zsh" ]]; then
-    source "$SPACESHIP_ROOT/sections/$section.zsh"
-  elif spaceship::defined "spaceship_$section"; then
+  if spaceship::defined "spaceship_$section"; then
     # Custom section is declared, nothing else to do
     continue
+  elif [[ -f "$SPACESHIP_ROOT/sections/$section.zsh" ]]; then
+    source "$SPACESHIP_ROOT/sections/$section.zsh"
   else
     echo "Section '$section' have not been loaded."
   fi
